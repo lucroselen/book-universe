@@ -14,7 +14,7 @@ const Login = () => {
                 <div className="mb-md-5 mt-md-4 pb-5">
                   <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                   <p className="text-white-50 mb-5">
-                    Please enter your login and password!
+                    Glad to see you back! Please log-in to your account.
                   </p>
 
                   <div className="form-outline mb-4">
@@ -22,7 +22,7 @@ const Login = () => {
                       type="email"
                       id="typeEmailX"
                       className="form-control form-control-lg"
-                      placeholder="Enter email"
+                      placeholder="Your email"
                     />
                   </div>
 
@@ -34,12 +34,6 @@ const Login = () => {
                       placeholder="Password"
                     />
                   </div>
-
-                  <p className="small mb-5 pb-lg-2">
-                    <a className="text-white-50" href="#!">
-                      Forgot password?
-                    </a>
-                  </p>
 
                   <button
                     className="btn btn-outline-light btn-lg px-5"
