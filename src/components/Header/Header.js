@@ -2,7 +2,7 @@ import "./Header.css";
 const Header = () => {
   return (
     <header>
-      <nav className="app-navbar navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="app-navbar navbar navbar-expand-lg navbar-dark bg-dark">
         <span className="navbar-brand">Book Universe</span>
 
         <div className="collapse navbar-collapse" id="navbarNavDropdown">

@@ -1,8 +1,8 @@
 import "./Footer.css";
 const Footer = () => {
   return (
-    <footer className="footer navbar-light bg-light">
-      <div>Book Universe 2021</div>
+    <footer className="footer navbar bg-dark">
+      <span className="footer text-white">Book Universe 2021</span>
     </footer>
   );
 };
