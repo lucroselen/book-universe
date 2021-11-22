@@ -16,3 +16,6 @@
     rgba(37, 117, 252, 1)
   );
 }
+.card-border {
+  border-radius: 1.8rem;
+}
