@@ -1,4 +1,5 @@
 import "./Register.css";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -53,9 +54,9 @@ const Register = () => {
                 <div>
                   <p className="mb-0">
                     Already have an account?{" "}
-                    <a href="#!" className="text-white-50 fw-bold">
+                    <Link to="/login" className="text-white-50 fw-bold">
                       Sign In
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
