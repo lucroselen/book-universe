@@ -3,10 +3,10 @@ const Header = () => {
   return (
     <header>
       <nav className="app-navbar navbar navbar-expand-lg navbar-light bg-light">
-        <span className=" navbar-brand">Book Universe</span>
+        <span className="navbar-brand">Book Universe</span>
 
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav mx-auto">
             <li className="nav-item active">
               <a className="nav-link" href="/">
                 Home
