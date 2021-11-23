@@ -10,7 +10,9 @@ const Register = () => {
             <div className="card bg-dark text-white card-border">
               <div className="card-body p-5 text-center">
                 <div className="mb-md-5 mt-md-4 pb-5">
-                  <h2 className="fw-bold mb-2 text-uppercase">Register</h2>
+                  <h2 className="fw-bold mb-2 text-uppercase text-white">
+                    Register
+                  </h2>
                   <p className="text-white-50 mb-5">Let's get you on board!</p>
 
                   <div className="form-outline mb-4">
@@ -49,7 +51,7 @@ const Register = () => {
                 </div>
 
                 <div>
-                  <p className="mb-0">
+                  <p className="mb-0 text-white">
                     Already have an account?{" "}
                     <Link to="/login" className="text-white-50 fw-bold">
                       Sign In
