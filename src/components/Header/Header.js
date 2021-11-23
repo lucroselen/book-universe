@@ -21,7 +21,7 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/">
-                Worst ranked books
+                All Books
               </Link>
             </li>
             <li className="nav-item">

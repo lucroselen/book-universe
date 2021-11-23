@@ -10,12 +10,12 @@ const Profile = () => {
               <div className="col-md-5 text-center">
                 <img
                   className="img-thumbnail md-margin-bottom-10"
-                  src="https://i.pinimg.com/736x/d4/08/1c/d4081ca74e3ed92452967846d6684653.jpg"
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                   alt=""
                 />
               </div>
               <div className="col-md-7">
-                <h2>Omni-Man Iliev</h2>
+                <h2>Cave Johnson</h2>
                 <span>
                   <strong>Job:</strong> Web Developer
                 </span>{" "}
