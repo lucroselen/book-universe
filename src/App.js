@@ -6,6 +6,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
+import Home from "./components/Home/Home";
+import AddBook from "./components/AddBook/AddBook";
+
 //import { useState, useEffect } from "react";
 
 function App() {
@@ -18,6 +21,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/add" element={<AddBook />} />
           </Routes>
         </main>
         <Footer />
