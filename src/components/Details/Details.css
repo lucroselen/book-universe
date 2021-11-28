@@ -3,6 +3,17 @@
   padding-bottom: 100px;
   margin: auto;
 }
+
+.mybuttons a {
+  margin: 6px;
+  width: 100%;
+}
+
+.mybuttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .project {
   margin: 15px 0;
 }

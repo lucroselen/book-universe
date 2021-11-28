@@ -1,4 +1,5 @@
 import "./Details.css";
+import { Link } from "react-router-dom";
 const Details = () => {
   return (
     <div>
@@ -14,7 +15,6 @@ const Details = () => {
                 quam nisi tincidunt tortor.
               </p>
             </div>
-            {/* / project-info-box */}
             <div className="project-info-box">
               <p>
                 <b>Book:</b> Inferno
@@ -31,14 +31,35 @@ const Details = () => {
               <p>
                 <b>Genre:</b> Horror
               </p>
+              <p>
+                <b>Added by:</b> Martin Iliev
+              </p>
+              <p>
+                <b>Current book rating: </b>4.32
+              </p>
+            </div>
+
+            <div className="project-info-box mybuttons">
+              <Link className="btn btn-dark" to="/edit">
+                Edit
+              </Link>
+              <Link className="btn btn-danger" to="/delete">
+                Delete
+              </Link>
+              <Link className="btn btn-success" to="/like">
+                Like
+              </Link>
+              <Link className="btn btn-warning" to="/dislike">
+                Dislike
+              </Link>
             </div>
           </div>
           <div className="col-md-7">
             <img
               src="https://www.book.store.bg/lrgimg/81743/vinata-v-nashite-zvezdi.jpg"
               alt="project-pic"
-              height="660"
-              width="546"
+              height="770"
+              width="600"
               className="rounded details-img"
             />
           </div>
