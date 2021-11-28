@@ -18,6 +18,7 @@
   text-align: center;
 }
 #home h1 {
+  font-family: Arial, Helvetica, sans-serif;
   margin: 30px 0 10px 0;
   font-size: 48px;
   font-weight: 700;
@@ -27,25 +28,25 @@
 }
 
 #home h2 {
+  font-family: Arial, Helvetica, sans-serif;
   color: #eee;
   margin-bottom: 50px;
   font-size: 24px;
 }
 
 #home .btn-get-started {
-  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
   font-weight: 500;
   font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
   padding: 8px 28px;
   border-radius: 50px;
   transition: 0.5s;
   margin: 10px;
   border: 2px solid #fff;
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 #home .btn-get-started:hover {
-  background: #2dc997;
-  border: 2px solid #2dc997;
+  background: #ccac20;
+  border: 2px solid #ccac20;
 }
