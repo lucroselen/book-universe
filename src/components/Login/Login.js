@@ -5,8 +5,8 @@ const Login = () => {
   return (
     <section className="fix">
       <div className="container py-5">
-        <div className="row d-flex justify-content-center align-items-center">
-          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div className="row d-flex justify-content-center align-items-center ">
+          <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
             <div className="card bg-dark card-border">
               <div className="card-body p-5 text-center">
                 <div className="mb-md-5 mt-md-4 pb-4">
