@@ -2,7 +2,7 @@ import "./EditBook.css";
 
 const EditBook = () => {
   return (
-    <section id="editBook" className="intro">
+    <section id="editBook" className="intro fix">
       <div className="mask d-flex align-items-center h-100">
         <div className="container">
           <div className="row justify-content-center">

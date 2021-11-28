@@ -2,7 +2,7 @@ import "./AddBook.css";
 
 const AddBook = () => {
   return (
-    <section id="addBook" className="intro">
+    <section id="addBook" className="intro fix">
       <div className="mask d-flex align-items-center h-100">
         <div className="container">
           <div className="row justify-content-center">

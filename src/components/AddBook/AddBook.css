@@ -2,10 +2,14 @@
   height: 100%;
   overflow: auto;
 }
+.fix {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
 
 #addBook {
   width: 100%;
-  position: fixed;
+
   /* fallback for old browsers */
   background: #755333;
 
