@@ -6,7 +6,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
-import Home from "./components/Home/Home";
+import AllBooks from "./components/AllBooks/AllBooks";
 import AddBook from "./components/AddBook/AddBook";
 import EditBook from "./components/EditBook/EditBook";
 
@@ -22,7 +22,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/all-books" element={<AllBooks />} />
             <Route path="/add" element={<AddBook />} />
             <Route path="/edit" element={<EditBook />} />
           </Routes>
