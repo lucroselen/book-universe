@@ -8,6 +8,7 @@ import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
 import AddBook from "./components/AddBook/AddBook";
+import EditBook from "./components/EditBook/EditBook";
 
 //import { useState, useEffect } from "react";
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Home />} />
             <Route path="/add" element={<AddBook />} />
+            <Route path="/edit" element={<EditBook />} />
           </Routes>
         </main>
         <Footer />
