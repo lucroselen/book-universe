@@ -32,7 +32,7 @@
   font-size: 24px;
 }
 
-.btn-get-started {
+#home .btn-get-started {
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
