@@ -7,7 +7,9 @@ const Details = () => {
         <div className="row">
           <div className="col-md-5">
             <div className="project-info-box mt-0">
-              <h5>Book Summary</h5>
+              <h5>
+                <b>Book Summary</b>
+              </h5>
               <p className="mb-0">
                 Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor
                 porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel
