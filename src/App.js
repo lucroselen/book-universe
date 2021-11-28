@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile";
 import AllBooks from "./components/AllBooks/AllBooks";
 import AddBook from "./components/AddBook/AddBook";
 import EditBook from "./components/EditBook/EditBook";
+import Home from "./components/Home/Home";
 
 //import { useState, useEffect } from "react";
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/top-10" element={<AllBooks />} />
             <Route path="/add" element={<AddBook />} />
             <Route path="/edit" element={<EditBook />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </main>
         <Footer />
