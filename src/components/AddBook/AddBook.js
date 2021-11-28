@@ -67,6 +67,18 @@ const AddBook = () => {
                       </div>
                       <div className=" mb-4">
                         <div className="form-outline">
+                          <label className="form-label" htmlFor="releaseDate">
+                            Release date
+                          </label>
+                          <input
+                            type="date"
+                            id="releaseDate"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div className=" mb-4">
+                        <div className="form-outline">
                           <label className="form-label" htmlFor="genre">
                             Genre
                           </label>
@@ -82,6 +94,7 @@ const AddBook = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="row">
                       <div className="col-12">
                         <div className="mt-4">

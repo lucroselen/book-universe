@@ -67,6 +67,18 @@ const EditBook = () => {
                       </div>
                       <div className=" mb-4">
                         <div className="form-outline">
+                          <label className="form-label" htmlFor="releaseDate">
+                            Release date
+                          </label>
+                          <input
+                            type="date"
+                            id="releaseDate"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div className=" mb-4">
+                        <div className="form-outline">
                           <label className="form-label" htmlFor="genre">
                             Genre
                           </label>
