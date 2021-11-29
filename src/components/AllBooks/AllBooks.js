@@ -9,7 +9,7 @@ const AllBooks = () => {
             <div className="col-md-5 col-sm-12 col-xs-12">
               <div className="product-image">
                 <img
-                  src="https://www.book.store.bg/lrgimg/81743/vinata-v-nashite-zvezdi.jpg"
+                  src="https://i4.helikon.bg/products/4316/17/174316/174316_b.jpg"
                   alt="194x228"
                   height="228"
                   width="194"

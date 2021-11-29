@@ -58,7 +58,7 @@ const Details = () => {
           </div>
           <div className="col-md-7">
             <img
-              src="https://www.book.store.bg/lrgimg/81743/vinata-v-nashite-zvezdi.jpg"
+              src="https://i4.helikon.bg/products/4316/17/174316/174316_b.jpg"
               alt="project-pic"
               height="770"
               width="600"
