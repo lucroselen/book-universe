@@ -11,6 +11,7 @@ import AddBook from "./components/AddBook/AddBook";
 import EditBook from "./components/EditBook/EditBook";
 import Home from "./components/Home/Home";
 import Details from "./components/Details/Details";
+import Page404 from "./components/Page404/Page404";
 
 //import { useState, useEffect } from "react";
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/edit" element={<EditBook />} />
             <Route path="/details" element={<Details />} />
             <Route path="/" element={<Home />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </main>
         <Footer />
