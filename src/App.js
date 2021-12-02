@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login/Login";
@@ -31,7 +36,8 @@ function App() {
             <Route path="/edit" element={<EditBook />} />
             <Route path="/details" element={<Details />} />
             <Route path="/" element={<Home />} />
-            <Route path="*" element={<Page404 />} />
+            <Route path="/404" element={<Page404 />} />
+            <Route path="*" element={<Navigate replace to="/404" />} />
           </Routes>
         </main>
         <Footer />
