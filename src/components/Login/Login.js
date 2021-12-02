@@ -1,9 +1,21 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  let navigate = useNavigate();
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    // let formData = new FormData(e.currentTarget);
+
+    // let { email, password } = Object.fromEntries(formData);
+
+    navigate("/all-books");
+  };
+
   return (
-    <section className="fix">
+    <form className="fix" onSubmit={submitHandler}>
       <div className="container py-5">
         <div className="row d-flex justify-content-center align-items-center ">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5 ">
@@ -20,6 +32,7 @@ const Login = () => {
                   <div className="form-outline mb-4">
                     <input
                       type="email"
+                      name="email"
                       id="typeEmailX"
                       className="form-control form-control-lg"
                       placeholder="Your email"
@@ -29,6 +42,7 @@ const Login = () => {
                   <div className="form-outline mb-4">
                     <input
                       type="password"
+                      name="password"
                       id="typePasswordX"
                       className="form-control form-control-lg"
                       placeholder="Password"
@@ -56,7 +70,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </section>
+    </form>
   );
 };
 
