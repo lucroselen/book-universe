@@ -37,6 +37,11 @@ const Header = () => {
           Logout
         </Link>
       </li>
+      <li className="nav-item right">
+        <Link className="nav-link" to="/profile">
+          Welcome, {user.user}
+        </Link>
+      </li>
     </>
   );
 
