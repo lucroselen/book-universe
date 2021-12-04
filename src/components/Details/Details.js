@@ -1,6 +1,10 @@
 import "./Details.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 const Details = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div>
       <div className="container">
@@ -40,21 +44,26 @@ const Details = () => {
                 <b>Current book rating: </b>4.32
               </p>
             </div>
-
-            <div className="project-info-box mybuttons">
-              <Link className="btn btn-dark" to="/edit">
-                Edit
-              </Link>
-              <Link className="btn btn-danger" to="/delete">
-                Delete
-              </Link>
-              <Link className="btn btn-success" to="/like">
-                Like
-              </Link>
-              <Link className="btn btn-warning" to="/dislike">
-                Dislike
-              </Link>
-            </div>
+            {user.id ? (
+              <div className="project-info-box mybuttons">
+                <Link className="btn btn-dark" to="/edit">
+                  Edit
+                </Link>
+                <Link className="btn btn-danger" to="/delete">
+                  Delete
+                </Link>
+                <Link className="btn btn-success" to="/like">
+                  Like
+                </Link>
+                <Link className="btn btn-warning" to="/dislike">
+                  Dislike
+                </Link>
+              </div>
+            ) : (
+              <div className="project-info-box mybuttons">
+                <h2>Log-in to edit or rate this book!</h2>
+              </div>
+            )}
           </div>
           <div className="col-md-7">
             <img
