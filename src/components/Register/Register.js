@@ -1,9 +1,14 @@
 import "./Register.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { register, login } from "../../services/authService";
+import { useContext } from "react";
+
+import * as authService from "../../services/authService";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Register = () => {
+  const { login } = useContext(AuthContext);
+
   let navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -13,10 +18,12 @@ const Register = () => {
     let { firstName, lastName, email, password, rePassword } =
       Object.fromEntries(formData);
 
-    register(firstName, lastName, email, password, rePassword).then(() => {
-      login(email, password);
-      navigate("/all-books");
-    });
+    authService
+      .register(firstName, lastName, email, password, rePassword)
+      .then((authData) => {
+        login(authData);
+        navigate("/all-books");
+      });
   };
 
   return (

@@ -22,7 +22,7 @@ router.post("/login", async (req, res) => {
       res.cookie(TOKEN_COOKIE_NAME, token, {
         httpOnly: true,
       });
-      res.json({ text: "Login successful!" });
+      res.json({ user: email, id: user._id });
     }
   } catch (error) {
     res.status(401).json({ error: errorHandler(error) });
@@ -53,11 +53,16 @@ router.post("/register", async (req, res) => {
       res.cookie(TOKEN_COOKIE_NAME, token, {
         httpOnly: true,
       });
-      res.json({ text: "Registration successful!" });
+      res.json({ user: email, id: user._id });
     }
   } catch (error) {
     res.status(401).json({ error: errorHandler(error) });
   }
+});
+router.get("/logout", (req, res) => {
+  res.clearCookie(TOKEN_COOKIE_NAME, { path: "/", domain: "localhost" });
+
+  res.json("You have logged out successfully");
 });
 
 module.exports = router;

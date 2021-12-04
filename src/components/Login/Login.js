@@ -1,9 +1,12 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { login } from "../../services/authService";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import * as authService from "../../services/authService";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
   let navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -12,7 +15,8 @@ const Login = () => {
 
     let { email, password } = Object.fromEntries(formData);
 
-    login(email, password).then(() => {
+    authService.login(email, password).then((authData) => {
+      login(authData);
       navigate("/all-books");
     });
   };
