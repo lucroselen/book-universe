@@ -1,16 +1,24 @@
 import "./Register.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { register } from "../../services/authService";
 
 const Register = () => {
   let navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
 
-    //let formData = new FormData(e.currentTarget);
+    let formData = new FormData(e.currentTarget);
 
-    //let { email, password, rePassword } = Object.fromEntries(formData);
+    let { firstName, lastName, email, password, rePassword } =
+      Object.fromEntries(formData);
 
+    register(firstName, lastName, email, password, rePassword);
+    // .then(
+    //   (authData) => {
+    //     //login(authData);
+    //   }
+    // );
     navigate("/all-books");
   };
 
@@ -26,7 +34,22 @@ const Register = () => {
                     Register
                   </h2>
                   <p className="text-white-50 mb-5">Let's get you on board!</p>
-
+                  <div className="form-outline mb-4">
+                    <input
+                      type="text"
+                      name="firstName"
+                      className="form-control form-control-lg"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div className="form-outline mb-4">
+                    <input
+                      type="text"
+                      name="lastName"
+                      className="form-control form-control-lg"
+                      placeholder="Last Name"
+                    />
+                  </div>
                   <div className="form-outline mb-4">
                     <input
                       type="email"
