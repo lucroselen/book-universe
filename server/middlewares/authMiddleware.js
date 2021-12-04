@@ -2,8 +2,7 @@ const { TOKEN_COOKIE_NAME, SECRET } = require("../config/constants");
 const jwt = require("jsonwebtoken");
 
 exports.auth = function (req, res, next) {
-  //to check
-  let token = req.headers[TOKEN_COOKIE_NAME];
+  let token = req.cookies[TOKEN_COOKIE_NAME];
 
   if (!token) {
     return next();

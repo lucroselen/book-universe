@@ -1,17 +1,20 @@
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { login } from "../../services/authService";
 
 const Login = () => {
   let navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // let formData = new FormData(e.currentTarget);
+    let formData = new FormData(e.currentTarget);
 
-    // let { email, password } = Object.fromEntries(formData);
+    let { email, password } = Object.fromEntries(formData);
 
-    navigate("/all-books");
+    login(email, password).then(() => {
+      navigate("/all-books");
+    });
   };
 
   return (

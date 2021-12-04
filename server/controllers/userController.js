@@ -7,6 +7,7 @@ const { errorHandler } = require("../middlewares/errorHandler");
 router.post("/login", async (req, res) => {
   try {
     let { email, password } = req.body;
+
     if (!email || !password) {
       res.json({ error: "You must fill in both fields!" });
       return;
@@ -21,6 +22,7 @@ router.post("/login", async (req, res) => {
       res.cookie(TOKEN_COOKIE_NAME, token, {
         httpOnly: true,
       });
+      res.json({ text: "Login successful!" });
     }
   } catch (error) {
     res.status(401).json({ error: errorHandler(error) });
