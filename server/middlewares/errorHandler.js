@@ -5,8 +5,15 @@ exports.errorHandler = function (error) {
   }
 
   if (errorNames?.length > 0) {
-    return error.errors[errorNames[0]].properties.message;
+    return (
+      error.errors[errorNames[0]].properties?.message ||
+      "An error has occurred. Please contact our support."
+    );
   } else {
-    return error.message || error;
+    return (
+      error?.message ||
+      error ||
+      "An error has occurred. Please contact our support."
+    );
   }
 };
