@@ -1,6 +1,27 @@
 import "./AddBook.css";
+import { useNavigate } from "react-router";
+import * as mainService from "../../services/mainService";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const AddBook = () => {
+  const { user } = useContext(AuthContext);
+
+  let navigate = useNavigate();
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(e.currentTarget);
+
+    let { bookName, authorName, imgUrl, isbn, date, summary, genre } =
+      Object.fromEntries(formData);
+    let creator = user.id;
+    mainService
+      .add(bookName, authorName, imgUrl, isbn, date, summary, genre, creator)
+      .then(() => {
+        navigate("/all-books");
+      });
+  };
   return (
     <section id="addBook" className="intro fix">
       <div className="mask d-flex align-items-center h-100">
@@ -10,7 +31,7 @@ const AddBook = () => {
               <div className="card">
                 <div className="card-body p-4 p-md-5">
                   <h3 className="mb-4 pb-2">Add a book</h3>
-                  <form action>
+                  <form action="POST" onSubmit={submitHandler}>
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
@@ -21,6 +42,7 @@ const AddBook = () => {
                             type="text"
                             id="bookName"
                             className="form-control"
+                            name="bookName"
                           />
                         </div>
                       </div>
@@ -32,6 +54,7 @@ const AddBook = () => {
                           <input
                             type="text"
                             id="authorName"
+                            name="authorName"
                             className="form-control"
                           />
                         </div>
@@ -47,13 +70,14 @@ const AddBook = () => {
                             type="text"
                             className="form-control"
                             id="imgUrl"
+                            name="imgUrl"
                             placeholder="https://..."
                           />
                         </div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className=" mb-4">
+                      <div className="mb-4">
                         <div className="form-outline">
                           <label className="form-label" htmlFor="isbn">
                             ISBN
@@ -61,11 +85,12 @@ const AddBook = () => {
                           <input
                             type="number"
                             id="isbn"
+                            name="isbn"
                             className="form-control"
                           />
                         </div>
                       </div>
-                      <div className=" mb-4">
+                      <div className="mb-4">
                         <div className="form-outline">
                           <label className="form-label" htmlFor="date">
                             Date
@@ -73,24 +98,36 @@ const AddBook = () => {
                           <input
                             type="date"
                             id="date"
+                            name="date"
                             className="form-control"
                           />
                         </div>
                       </div>
-                      <div className=" mb-4">
+                      <div className="mb-4">
+                        <label className="form-label" htmlFor="summary">
+                          Summary
+                        </label>
+                        <textarea
+                          className="form-control"
+                          id="summary"
+                          rows="3"
+                          name="summary"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="mb-4">
                         <div className="form-outline">
-                          <label className="form-label" htmlFor="genre">
+                          <label htmlFor="genre" className="form-label">
                             Genre
                           </label>
-                          <select className="select col-md-12" multiple>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                            <option value="4">Four</option>
-                            <option value="5">Five</option>
-                            <option value="6">Six</option>
-                            <option value="7">Seven</option>
-                          </select>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="genre"
+                            name="genre"
+                            placeholder="Example: Sci-fi"
+                          />
                         </div>
                       </div>
                     </div>
