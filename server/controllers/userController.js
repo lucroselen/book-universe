@@ -3,6 +3,7 @@ const router = express.Router();
 const { TOKEN_COOKIE_NAME } = require("../config/constants");
 const authServices = require("../services/authServices");
 const { errorHandler } = require("../middlewares/errorHandler");
+const { getUserById } = require("../services/authServices");
 
 router.post("/login", async (req, res) => {
   try {
@@ -63,6 +64,15 @@ router.get("/logout", (req, res) => {
   res.clearCookie(TOKEN_COOKIE_NAME, { path: "/", domain: "localhost" });
 
   res.json("You have logged out successfully");
+});
+
+router.get("/profile/:id", async (req, res) => {
+  try {
+    let userData = await getUserById(req.params.id);
+    res.json({ firstName: userData.firstName, lastName: userData.lastName });
+  } catch (error) {
+    res.status(401).json({ error: errorHandler(error) });
+  }
 });
 
 module.exports = router;
