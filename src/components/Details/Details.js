@@ -58,6 +58,9 @@ const Details = () => {
                 <Link className="btn btn-warning" to="/dislike">
                   Dislike
                 </Link>
+                <Link className="btn btn-primary" to="/favorite">
+                  Favorite
+                </Link>
               </div>
             ) : (
               <div className="project-info-box mybuttons">
