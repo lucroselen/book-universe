@@ -48,12 +48,12 @@ const userSchema = new mongoose.Schema({
       "Password should consist only english letters and digits!",
     ],
   },
-  //   likedBooks: [
-  //     {
-  //       type: mongoose.Types.ObjectId,
-  //       ref: "Book",
-  //     },
-  //   ],
+  favourites: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Book",
+    },
+  ],
 });
 
 userSchema.post("save", function (error, doc, next) {
