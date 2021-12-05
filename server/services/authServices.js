@@ -27,5 +27,7 @@ const createToken = function (user) {
   return jwtSign(payload, SECRET);
 };
 
-let authServices = { register, login, createToken };
+const getUserById = (id) => User.findById(id);
+
+let authServices = { register, login, createToken, getUserById };
 module.exports = authServices;
