@@ -8,9 +8,7 @@ export const register = (firstName, lastName, email, password, rePassword) => {
     },
     credentials: "include",
     body: JSON.stringify({ firstName, lastName, email, password, rePassword }),
-  })
-    .then((res) => res.json())
-    .then((result) => result);
+  }).then((res) => res.json());
 };
 
 export const login = async (email, password) => {
@@ -46,4 +44,13 @@ export const getUser = () => {
 
 export const isAuthenticated = () => {
   return Boolean(getUser());
+};
+
+export const getUserById = async (id) => {
+  return fetch(`${serverUrl}/users/profile/${id}`, {
+    headers: {
+      "content-type": "application/json",
+    },
+    credentials: "include",
+  }).then((res) => res.json());
 };
