@@ -37,7 +37,20 @@ const Book = (props) => {
                   {book.bookName}{" "}
                   <span>
                     Genre: {book.genre} <br />
-                    Rating: {book.rating} {stars}
+                  </span>
+                  <span>
+                    Rating:{" "}
+                    <b
+                      style={
+                        book.rating === 0
+                          ? { color: "black" }
+                          : book.rating > 0
+                          ? { color: "green" }
+                          : { color: "red" }
+                      }
+                    >
+                      {book.rating} {stars}
+                    </b>
                   </span>
                 </Link>
               </h5>
@@ -47,7 +60,7 @@ const Book = (props) => {
               <span className="tag1" />
             </div>
             <div className="description">
-              <p>{book.summary.substr(0, 79) + "..."} </p>
+              <p>{book.summary.substr(0, 65) + "..."} </p>
             </div>
             <div className="product-info smart-form">
               <div className="row">

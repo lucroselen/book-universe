@@ -70,7 +70,17 @@ const Details = () => {
               </p>
               <p>
                 <b>Current book rating: </b>
-                {bookData.rating} {stars}
+                <b
+                  style={
+                    bookData.rating === 0
+                      ? { color: "black" }
+                      : bookData.rating > 0
+                      ? { color: "green" }
+                      : { color: "red" }
+                  }
+                >
+                  {bookData.rating} {stars}
+                </b>
               </p>
             </div>
             {user.id ? (
