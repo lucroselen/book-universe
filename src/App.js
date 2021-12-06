@@ -22,6 +22,7 @@ import Home from "./components/Home/Home";
 import Details from "./components/Details/Details";
 import Page404 from "./components/Page404/Page404";
 import Logout from "./components/Logout/Logout";
+import Delete from "./components/Delete/Delete";
 
 //import { useState, useEffect } from "react";
 const initialAuthState = {
@@ -52,6 +53,7 @@ function App() {
             <Route path="/add" element={<AddBook />} />
             <Route path="/edit" element={<EditBook />} />
             <Route path="/details/:bookId" element={<Details />} />
+            <Route path="/delete/:bookId" element={<Delete />} />
             <Route path="/" element={<Home />} />
             <Route path="/404" element={<Page404 />} />
             <Route path="*" element={<Navigate replace to="/404" />} />

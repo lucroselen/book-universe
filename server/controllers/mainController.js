@@ -51,4 +51,13 @@ router.get("/details/:id", async (req, res) => {
   }
 });
 
+router.get("/delete/:id", async (req, res) => {
+  try {
+    await bookServices.deleteRecord(req.params.id);
+    res.json({ message: "Book deleted successfully!" });
+  } catch (error) {
+    res.json({ error: errorHandler(error) });
+  }
+});
+
 module.exports = router;

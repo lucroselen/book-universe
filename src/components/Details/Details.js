@@ -78,7 +78,7 @@ const Details = () => {
                 <Link className="btn btn-dark" to="/edit">
                   Edit
                 </Link>
-                <Link className="btn btn-danger" to="/delete">
+                <Link className="btn btn-danger" to={`/delete/${bookData._id}`}>
                   Delete
                 </Link>
                 <Link className="btn btn-success" to="/like">
