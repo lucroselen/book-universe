@@ -51,7 +51,7 @@ function App() {
             <Route path="/top-10" element={<AllBooks />} />
             <Route path="/add" element={<AddBook />} />
             <Route path="/edit" element={<EditBook />} />
-            <Route path="/details" element={<Details />} />
+            <Route path="/details/:bookId" element={<Details />} />
             <Route path="/" element={<Home />} />
             <Route path="/404" element={<Page404 />} />
             <Route path="*" element={<Navigate replace to="/404" />} />

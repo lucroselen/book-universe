@@ -61,9 +61,12 @@ router.post("/register", async (req, res) => {
   }
 });
 router.get("/logout", (req, res) => {
-  res.clearCookie(TOKEN_COOKIE_NAME, { path: "/", domain: "localhost" });
-
-  res.json("You have logged out successfully");
+  try {
+    res.clearCookie(TOKEN_COOKIE_NAME, { path: "/", domain: "localhost" });
+    res.json("You have logged out successfully");
+  } catch (error) {
+    res.status(401).json({ error: errorHandler(error) });
+  }
 });
 
 router.get("/profile/:id", async (req, res) => {

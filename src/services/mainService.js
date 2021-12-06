@@ -6,6 +6,12 @@ export const getAll = () => {
   }).then((res) => res.json());
 };
 
+export const getOne = (id) => {
+  return fetch(`${serverUrl}/details/${id}`, {
+    credentials: "include",
+  }).then((res) => res.json());
+};
+
 export const add = (
   bookName,
   authorName,

@@ -1,10 +1,42 @@
 import "./Details.css";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import * as mainService from "../../services/mainService";
+
 const Details = () => {
   const { user } = useContext(AuthContext);
+  const [book, setBook] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const { bookId } = useParams();
 
+  useEffect(() => {
+    mainService.getOne(bookId).then((res) => {
+      setBook(res);
+      setLoading(false);
+    });
+  }, [bookId]);
+  let bookData = book.book;
+
+  if (isLoading) {
+    return (
+      <div className="container">
+        <strong className="h1 loading">Loading...</strong>
+      </div>
+    );
+  }
+  let stars = "";
+  if (bookData.rating >= 1 && bookData.rating <= 3) {
+    stars = "⭐";
+  } else if (bookData.rating >= 4 && bookData.rating <= 6) {
+    stars = "⭐⭐";
+  } else if (bookData.rating >= 7 && bookData.rating <= 9) {
+    stars = "⭐⭐⭐";
+  } else if (bookData.rating >= 10 && bookData.rating <= 12) {
+    stars = "⭐⭐⭐⭐";
+  } else if (bookData.rating >= 13) {
+    stars = "⭐⭐⭐⭐⭐";
+  }
   return (
     <div>
       <div className="container">
@@ -14,34 +46,31 @@ const Details = () => {
               <h5>
                 <b>Book Summary</b>
               </h5>
-              <p className="mb-0">
-                Vivamus pellentesque, felis in aliquam ullamcorper, lorem tortor
-                porttitor erat, hendrerit porta nunc tellus eu lectus. Ut vel
-                imperdiet est. Pellentesque condimentum, dui et blandit laoreet,
-                quam nisi tincidunt tortor.
-              </p>
+              <p className="mb-0">{bookData.summary}</p>
             </div>
             <div className="project-info-box">
               <p>
-                <b>Book:</b> Inferno
+                <b>Book:</b> {bookData.bookName}
               </p>
               <p>
-                <b>Author:</b> James Doe
+                <b>Author:</b> {bookData.authorName}
               </p>
               <p>
-                <b>Date:</b> 14.02.2020
+                <b>Date:</b> {bookData.date.substr(0, 10)}
               </p>
               <p>
-                <b>ISBN:</b> 921395123132
+                <b>ISBN:</b> {bookData.isbn}
               </p>
               <p>
-                <b>Genre:</b> Horror
+                <b>Genre:</b> {bookData.genre}
               </p>
               <p>
-                <b>Added by:</b> Martin Iliev
+                <b>Added by:</b> {bookData.creator.firstName}{" "}
+                {bookData.creator.lastName}
               </p>
               <p>
-                <b>Current book rating: </b>4.32
+                <b>Current book rating: </b>
+                {bookData.rating} {stars}
               </p>
             </div>
             {user.id ? (
@@ -70,7 +99,7 @@ const Details = () => {
           </div>
           <div className="col-md-7">
             <img
-              src="https://i4.helikon.bg/products/4316/17/174316/174316_b.jpg"
+              src={bookData.imgUrl}
               alt="project-pic"
               height="770"
               width="600"
