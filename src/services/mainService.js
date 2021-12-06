@@ -1,12 +1,10 @@
 const serverUrl = "http://localhost:5000";
 
-// export const getAll = () => {
-//   return fetch(`${serverUrl}/all-books`, {
-//     credentials: "include",
-//   })
-//     .then((res) => res.json())
-//     .then((result) => result);
-// };
+export const getAll = () => {
+  return fetch(`${serverUrl}/all-books`, {
+    credentials: "include",
+  }).then((res) => res.json());
+};
 
 export const add = (
   bookName,
@@ -34,7 +32,5 @@ export const add = (
       genre,
       creator,
     }),
-  })
-    .then((res) => res.json())
-    .then((result) => result);
+  }).then((res) => res.json());
 };
