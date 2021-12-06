@@ -73,4 +73,42 @@ router.get("/delete/:id", async (req, res) => {
   }
 });
 
+router.get("/vote-up/:id", async (req, res) => {
+  let bookId = req.params.id;
+  let book = await bookServices.getOne(req.params.id);
+  try {
+    if (
+      !(book.creator._id.toString() === req.user._id) &&
+      !book.votes.find((x) => x._id.toString() === req.user._id)
+    ) {
+      await bookServices.voteUp(bookId, req.user._id);
+
+      res.json({ message: "Book liked" });
+    } else {
+      res.json({ message: "You are not allowed to like/dislike this book!" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: generalError });
+  }
+});
+
+router.get("/vote-down/:id", async (req, res) => {
+  let bookId = req.params.id;
+  let book = await bookServices.getOne(req.params.id);
+  try {
+    if (
+      !(book.creator._id.toString() === req.user._id) &&
+      !book.votes.find((x) => x._id.toString() === req.user._id)
+    ) {
+      await bookServices.voteDown(bookId, req.user._id);
+
+      res.json({ message: "Book disliked!" });
+    } else {
+      res.json({ message: "You are not allowed to like/dislike this book!" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: generalError });
+  }
+});
+
 module.exports = router;
