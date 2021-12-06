@@ -6,6 +6,12 @@ export const getAll = () => {
   }).then((res) => res.json());
 };
 
+export const getTop10 = () => {
+  return fetch(`${serverUrl}/top-10`, {
+    credentials: "include",
+  }).then((res) => res.json());
+};
+
 export const deleteOne = (id) => {
   return fetch(`${serverUrl}/delete/${id}`, {
     credentials: "include",

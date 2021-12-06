@@ -49,7 +49,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/all-books" element={<AllBooks />} />
-            <Route path="/top-10" element={<AllBooks />} />
+            <Route path="/top-10" element={<AllBooks mode="getTop10" />} />
             <Route path="/add" element={<AddBook />} />
             <Route path="/edit" element={<EditBook />} />
             <Route path="/details/:bookId" element={<Details />} />

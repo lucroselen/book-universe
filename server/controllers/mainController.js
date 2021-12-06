@@ -20,6 +20,19 @@ router.get("/all-books", async (req, res) => {
   }
 });
 
+router.get("/top-10", async (req, res) => {
+  try {
+    let books = await bookServices.getTop10();
+
+    res.json({ books });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      error: generalError,
+    });
+  }
+});
+
 router.post("/add", async (req, res) => {
   let { bookName, authorName, imgUrl, isbn, date, summary, genre, creator } =
     req.body;

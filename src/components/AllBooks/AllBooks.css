@@ -3,6 +3,11 @@
   padding-bottom: 100px;
   margin: auto;
 }
+.books {
+  justify-content: center;
+  display: flex;
+  padding-bottom: 35px;
+}
 .no-books {
   display: flex;
   justify-content: center;
