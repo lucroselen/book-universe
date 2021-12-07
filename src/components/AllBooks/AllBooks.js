@@ -6,9 +6,7 @@ import * as mainService from "../../services/mainService";
 const AllBooks = (props) => {
   const [books, setBooks] = useState([]);
   useEffect(() => {
-    console.log(props);
     if (props.mode === "getTop10") {
-      console.log("here");
       mainService.getTop10().then((res) => setBooks(res));
     } else {
       mainService.getAll().then((res) => setBooks(res));
