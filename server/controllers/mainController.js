@@ -58,7 +58,8 @@ router.post("/add", async (req, res) => {
 router.get("/details/:id", async (req, res) => {
   try {
     let book = await bookServices.getOne(req.params.id);
-    res.json({ book });
+    let voted = book.votes.find((x) => x._id.toString() === req.user._id);
+    res.json({ book, voted });
   } catch (error) {
     res.json({ error: errorHandler(error) });
   }

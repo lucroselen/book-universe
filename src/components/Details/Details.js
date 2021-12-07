@@ -9,7 +9,6 @@ const Details = () => {
   const [book, setBook] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const { bookId } = useParams();
-
   useEffect(() => {
     mainService.getOne(bookId).then((res) => {
       setBook(res);
@@ -17,6 +16,7 @@ const Details = () => {
     });
   }, [bookId]);
   let bookData = book.book;
+  let voted = Boolean(book.voted);
 
   if (isLoading) {
     return (
@@ -37,6 +37,7 @@ const Details = () => {
   } else if (bookData.rating >= 13) {
     stars = "⭐⭐⭐⭐⭐";
   }
+
   return (
     <div>
       <div className="container">
@@ -83,22 +84,43 @@ const Details = () => {
                 </b>
               </p>
             </div>
+            {voted === true ? (
+              <div className="project-info-box mybuttons">
+                <h2 style={{ color: "black" }}>
+                  Thank you for voting for this book!
+                </h2>
+              </div>
+            ) : null}
             {user.id ? (
               <div className="project-info-box mybuttons">
-                <Link className="btn btn-dark" to="/edit">
+                <Link className="btn btn-dark" to={`/edit/${bookData._id}`}>
                   Edit
                 </Link>
                 <Link className="btn btn-danger" to={`/delete/${bookData._id}`}>
                   Delete
                 </Link>
-                <Link className="btn btn-success" to="/like">
-                  Like
-                </Link>
-                <Link className="btn btn-warning" to="/dislike">
-                  Dislike
-                </Link>
-                <Link className="btn btn-primary" to="/favorite">
-                  Favorite
+                {voted === false ? (
+                  <>
+                    <Link
+                      className="btn btn-success"
+                      to={`/vote-up/${bookData._id}`}
+                    >
+                      Like
+                    </Link>
+                    <Link
+                      className="btn btn-warning"
+                      to={`/vote-down/${bookData._id}`}
+                    >
+                      Dislike
+                    </Link>
+                  </>
+                ) : null}
+
+                <Link
+                  className="btn btn-primary"
+                  to={`/favorite/${bookData._id}`}
+                >
+                  Favourite
                 </Link>
               </div>
             ) : (

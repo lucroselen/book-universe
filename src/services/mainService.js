@@ -52,3 +52,15 @@ export const add = (
     }),
   }).then((res) => res.json());
 };
+
+export const voteUp = (id) => {
+  return fetch(`${serverUrl}/vote-up/${id}`, {
+    credentials: "include",
+  }).then((res) => res.json());
+};
+
+export const voteDown = (id) => {
+  return fetch(`${serverUrl}/vote-down/${id}`, {
+    credentials: "include",
+  }).then((res) => res.json());
+};
