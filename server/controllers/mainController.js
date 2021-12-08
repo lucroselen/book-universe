@@ -58,8 +58,9 @@ router.post("/add", async (req, res) => {
 router.get("/details/:id", async (req, res) => {
   try {
     let book = await bookServices.getOne(req.params.id);
-    let voted = book.votes.find((x) => x._id.toString() === req.user._id);
-    res.json({ book, voted });
+    let voted = book.votes.find((x) => x._id.toString() === req.user?._id);
+    let isOwnedBy = book.creator._id.toString() === req.user?._id;
+    res.json({ book, voted, isOwnedBy });
   } catch (error) {
     res.json({ error: errorHandler(error) });
   }
