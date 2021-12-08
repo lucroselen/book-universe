@@ -11,12 +11,14 @@ const Details = () => {
   const { bookId } = useParams();
   useEffect(() => {
     mainService.getOne(bookId).then((res) => {
+      console.log(res);
       setBook(res);
       setLoading(false);
     });
   }, [bookId]);
   let bookData = book.book;
   let voted = Boolean(book.voted);
+  let isOwnedBy = Boolean(book.isOwnedBy);
 
   if (isLoading) {
     return (
@@ -93,12 +95,20 @@ const Details = () => {
             ) : null}
             {user.id ? (
               <div className="project-info-box mybuttons">
-                <Link className="btn btn-dark" to={`/edit/${bookData._id}`}>
-                  Edit
-                </Link>
-                <Link className="btn btn-danger" to={`/delete/${bookData._id}`}>
-                  Delete
-                </Link>
+                {isOwnedBy ? (
+                  <>
+                    {" "}
+                    <Link className="btn btn-dark" to={`/edit/${bookData._id}`}>
+                      Edit
+                    </Link>
+                    <Link
+                      className="btn btn-danger"
+                      to={`/delete/${bookData._id}`}
+                    >
+                      Delete
+                    </Link>
+                  </>
+                ) : null}
                 {voted === false ? (
                   <>
                     <Link
