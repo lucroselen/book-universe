@@ -109,7 +109,7 @@ const Details = () => {
                     </Link>
                   </>
                 ) : null}
-                {voted === false ? (
+                {voted === false && !isOwnedBy ? (
                   <>
                     <Link
                       className="btn btn-success"
@@ -125,13 +125,14 @@ const Details = () => {
                     </Link>
                   </>
                 ) : null}
-
-                <Link
-                  className="btn btn-primary"
-                  to={`/favorite/${bookData._id}`}
-                >
-                  Favourite
-                </Link>
+                {!isOwnedBy ? (
+                  <Link
+                    className="btn btn-primary"
+                    to={`/favorite/${bookData._id}`}
+                  >
+                    Favourite
+                  </Link>
+                ) : null}
               </div>
             ) : (
               <div className="project-info-box mybuttons">
