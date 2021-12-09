@@ -63,7 +63,7 @@ router.get("/details/:id", async (req, res) => {
     let user = await User.findById(req.user?._id);
     let voted = book.votes.find((x) => x._id.toString() === req.user?._id);
     let isOwnedBy = book.creator._id.toString() === req.user?._id;
-    let isInFavorites = user.favorites.find(
+    let isInFavorites = user?.favorites.find(
       (x) => book._id.toString() === x.toString()
     );
     res.json({ book, voted, isOwnedBy, isInFavorites });

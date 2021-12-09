@@ -7,8 +7,9 @@ const Favorite = () => {
   const navigate = useNavigate();
   useEffect(() => {
     mainService.favorite(bookId);
-
-    navigate(`/details/${bookId}`);
+    setTimeout(() => {
+      navigate(`/details/${bookId}`);
+    }, 100);
   });
 
   return null;

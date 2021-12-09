@@ -18,6 +18,7 @@ const Details = () => {
   let bookData = book.book;
   let voted = Boolean(book.voted);
   let isOwnedBy = Boolean(book.isOwnedBy);
+  let isInFavorites = Boolean(book.isInFavorites);
 
   if (isLoading) {
     return (
@@ -93,9 +94,9 @@ const Details = () => {
               </div>
             ) : null}
             {user.id ? (
-              <div className="project-info-box mybuttons">
+              <>
                 {isOwnedBy ? (
-                  <>
+                  <div className="project-info-box mybuttons">
                     {" "}
                     <Link className="btn btn-dark" to={`/edit/${bookData._id}`}>
                       Edit
@@ -106,10 +107,10 @@ const Details = () => {
                     >
                       Delete
                     </Link>
-                  </>
+                  </div>
                 ) : null}
                 {voted === false && !isOwnedBy ? (
-                  <>
+                  <div className="project-info-box mybuttons">
                     <Link
                       className="btn btn-success"
                       to={`/vote-up/${bookData._id}`}
@@ -122,22 +123,32 @@ const Details = () => {
                     >
                       Dislike
                     </Link>
-                  </>
+                  </div>
                 ) : null}
-                {!isOwnedBy ? (
+              </>
+            ) : (
+              <div className="project-info-box mybuttons">
+                <h2>Log-in to edit or rate this book!</h2>
+              </div>
+            )}
+            {!isOwnedBy && user.id ? (
+              !isInFavorites ? (
+                <div className="project-info-box mybuttons">
                   <Link
                     className="btn btn-primary"
                     to={`/favorite/${bookData._id}`}
                   >
                     Add to Favorites
                   </Link>
-                ) : null}
-              </div>
-            ) : (
-              <div className="project-info-box mybuttons">
-                <h2>Log-in to edit or rate this book!</h2>
-              </div>
-            )}
+                </div>
+              ) : (
+                <div className="project-info-box mybuttons">
+                  <h2 style={{ color: "black" }}>
+                    Book has been added to your favorites!
+                  </h2>
+                </div>
+              )
+            ) : null}
           </div>
           <div className="col-md-7">
             <img
