@@ -15,10 +15,6 @@ const Profile = () => {
       }, 400);
     });
   }, [user.id]);
-  const favoritesToShow = userData.favorites
-    .map((x) => [x.bookName, x.authorName].join(" by "))
-    .join(", ");
-
   if (loading) {
     return (
       <div className="container">
@@ -26,6 +22,10 @@ const Profile = () => {
       </div>
     );
   }
+  const favoritesToShow = userData.favorites
+    .map((x) => [x.bookName, x.authorName].join(" by "))
+    .join(", ");
+
   return (
     <div className="container allign">
       <div className="profile card">
