@@ -31,7 +31,7 @@ const AddBook = () => {
               <div className="card">
                 <div className="card-body p-4 p-md-5">
                   <h3 className="mb-4 pb-2">Add a book</h3>
-                  <form action="POST" onSubmit={submitHandler}>
+                  <form action="/add" method="POST" onSubmit={submitHandler}>
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
