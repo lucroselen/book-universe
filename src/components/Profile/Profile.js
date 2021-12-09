@@ -49,7 +49,15 @@ const Profile = () => {
 
                 <hr />
                 <p>
-                  <strong>{favoritesToShow}</strong>
+                  <strong>
+                    {favoritesToShow.length > 0 ? (
+                      favoritesToShow
+                    ) : (
+                      <p className="h2">
+                        You don't have any favorite books yet!
+                      </p>
+                    )}
+                  </strong>
                 </p>
               </div>
             </div>
