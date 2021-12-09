@@ -72,9 +72,14 @@ router.get("/details/:id", async (req, res) => {
 });
 
 router.get("/delete/:id", async (req, res) => {
+  let book = await bookServices.getOne(req.params.id);
   try {
-    await bookServices.deleteRecord(req.params.id);
-    res.json({ message: "Book deleted successfully!" });
+    if (book.creator._id.toString() === req.user._id) {
+      await bookServices.deleteRecord(req.params.id);
+      res.json({ message: "Book deleted successfully!" });
+    } else {
+      res.status(403).json({ message: "You are not the owner of this book!" });
+    }
   } catch (error) {
     res.json({ error: errorHandler(error) });
   }
