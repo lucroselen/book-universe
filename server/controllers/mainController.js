@@ -3,6 +3,7 @@ const express = require("express");
 const { errorHandler } = require("../middlewares/errorHandler");
 const router = express.Router();
 const bookServices = require("../services/bookServices");
+const User = require("../models/User");
 
 let generalError =
   "We are experiencing technical difficulties and are working to resolve them. Thank you for your understanding!";
@@ -58,9 +59,13 @@ router.post("/add", async (req, res) => {
 router.get("/details/:id", async (req, res) => {
   try {
     let book = await bookServices.getOne(req.params.id);
+    let user = await User.findById(req.user?._id);
     let voted = book.votes.find((x) => x._id.toString() === req.user?._id);
     let isOwnedBy = book.creator._id.toString() === req.user?._id;
-    res.json({ book, voted, isOwnedBy });
+    let isInFavorites = user.favorites.find(
+      (x) => book._id.toString() === x.toString()
+    );
+    res.json({ book, voted, isOwnedBy, isInFavorites });
   } catch (error) {
     res.json({ error: errorHandler(error) });
   }
@@ -107,6 +112,24 @@ router.get("/vote-down/:id", async (req, res) => {
       res.json({ message: "Book disliked!" });
     } else {
       res.json({ message: "You are not allowed to like/dislike this book!" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: generalError });
+  }
+});
+
+router.get("/favorite/:id", async (req, res) => {
+  let bookId = req.params.id;
+  let book = await bookServices.getOne(req.params.id);
+  try {
+    if (!(book.creator._id.toString() === req.user._id)) {
+      await bookServices.favorite(bookId, req.user._id);
+
+      res.json({ message: "Book added to favorites!" });
+    } else {
+      res.json({
+        message: "You are not allowed to add this book to favourites!",
+      });
     }
   } catch (error) {
     res.status(400).json({ error: generalError });

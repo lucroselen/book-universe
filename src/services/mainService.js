@@ -64,3 +64,9 @@ export const voteDown = (id) => {
     credentials: "include",
   }).then((res) => res.json());
 };
+
+export const favorite = (id) => {
+  return fetch(`${serverUrl}/favorite/${id}`, {
+    credentials: "include",
+  }).then((res) => res.json());
+};

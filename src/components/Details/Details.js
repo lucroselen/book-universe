@@ -11,7 +11,6 @@ const Details = () => {
   const { bookId } = useParams();
   useEffect(() => {
     mainService.getOne(bookId).then((res) => {
-      console.log(res);
       setBook(res);
       setLoading(false);
     });
@@ -130,7 +129,7 @@ const Details = () => {
                     className="btn btn-primary"
                     to={`/favorite/${bookData._id}`}
                   >
-                    Favourite
+                    Add to Favorites
                   </Link>
                 ) : null}
               </div>

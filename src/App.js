@@ -24,6 +24,7 @@ import Page404 from "./components/Page404/Page404";
 import Logout from "./components/Logout/Logout";
 import Delete from "./components/Delete/Delete";
 import Vote from "./components/Vote/Vote";
+import Favorite from "./components/Favorite/Favorite";
 
 //import { useState, useEffect } from "react";
 const initialAuthState = {
@@ -57,6 +58,7 @@ function App() {
             <Route path="/delete/:bookId" element={<Delete />} />
             <Route path="/vote-up/:bookId" element={<Vote mode="up" />} />
             <Route path="/vote-down/:bookId" element={<Vote mode="down" />} />
+            <Route path="/favorite/:bookId" element={<Favorite />} />
             <Route path="/" element={<Home />} />
             <Route path="/404" element={<Page404 />} />
             <Route path="*" element={<Navigate replace to="/404" />} />

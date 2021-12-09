@@ -31,6 +31,16 @@ const voteDown = async (bookId, userId) => {
   book.save();
   return;
 };
+
+const favorite = async (bookId, userId) => {
+  let book = await Book.findById(bookId);
+  let user = await User.findById(userId);
+
+  user.favorites.push(book);
+
+  user.save();
+  return;
+};
 const bookServices = {
   create,
   getAll,
@@ -39,5 +49,6 @@ const bookServices = {
   getTop10,
   voteUp,
   voteDown,
+  favorite,
 };
 module.exports = bookServices;

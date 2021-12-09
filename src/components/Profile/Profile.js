@@ -28,12 +28,12 @@ const Profile = () => {
                   {names.firstName} {names.lastName}
                 </strong>
                 <span>
-                  <h3>FAVOURITE BOOKS:</h3>
+                  <h3>FAVORITE BOOKS:</h3>
                 </span>
 
                 <hr />
                 <p>
-                  <strong>You have no favourite books yet.</strong>
+                  <strong>You have no favorite books yet.</strong>
                 </p>
               </div>
             </div>

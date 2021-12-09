@@ -42,13 +42,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Password should not be empty!"],
-    minLength: [4, "Password should be at least 4 characters long!"],
-    validate: [
-      /^[A-Z0-9]*$/i,
-      "Password should consist only english letters and digits!",
-    ],
+    minLength: [4, "Password should be at least 6 characters long!"],
+    validate: [/^[^ ]*$/, "Password cannot contain white spaces!"],
   },
-  favourites: [
+  favorites: [
     {
       type: mongoose.Types.ObjectId,
       ref: "Book",
