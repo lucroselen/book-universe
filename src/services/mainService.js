@@ -53,6 +53,36 @@ export const add = (
   }).then((res) => res.json());
 };
 
+export const edit = (
+  id,
+  bookName,
+  authorName,
+  imgUrl,
+  isbn,
+  date,
+  summary,
+  genre,
+  creator
+) => {
+  return fetch(`${serverUrl}/edit/${id}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      bookName,
+      authorName,
+      imgUrl,
+      isbn,
+      date,
+      summary,
+      genre,
+      creator,
+    }),
+  }).then((res) => res.json());
+};
+
 export const voteUp = (id) => {
   return fetch(`${serverUrl}/vote-up/${id}`, {
     credentials: "include",

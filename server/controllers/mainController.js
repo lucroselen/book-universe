@@ -40,7 +40,7 @@ router.post("/add", async (req, res) => {
     req.body;
 
   try {
-    let books = await bookServices.create({
+    await bookServices.create({
       bookName,
       authorName,
       imgUrl,
@@ -50,7 +50,32 @@ router.post("/add", async (req, res) => {
       genre,
       creator,
     });
-    res.json({ books });
+    res.json({ message: "Book created successfully!" });
+  } catch (error) {
+    res.status(400).json({ error: errorHandler(error) });
+  }
+});
+
+router.post("/edit/:id", async (req, res) => {
+  let { bookName, authorName, imgUrl, isbn, date, summary, genre, creator } =
+    req.body;
+  let bookId = req.params.id;
+  try {
+    if (creator?._id.toString() === req.user?._id) {
+      await bookServices.edit(
+        bookId,
+        bookName,
+        authorName,
+        imgUrl,
+        isbn,
+        date,
+        summary,
+        genre
+      );
+      res.json({ message: "Book edited successfully!" });
+    } else {
+      res.status(403).json({ message: "You are not the owner of this book!" });
+    }
   } catch (error) {
     res.status(400).json({ error: errorHandler(error) });
   }

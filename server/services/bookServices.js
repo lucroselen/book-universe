@@ -41,6 +41,31 @@ const favorite = async (bookId, userId) => {
 
   await User.updateOne({ _id: userId }, { favorites: favoriteBooks });
 };
+
+const edit = (
+  bookId,
+  bookName,
+  authorName,
+  imgUrl,
+  isbn,
+  date,
+  summary,
+  genre
+) =>
+  Book.updateOne(
+    { _id: bookId },
+    {
+      bookName,
+      authorName,
+      imgUrl,
+      isbn,
+      date,
+      summary,
+      genre,
+    },
+    { runValidators: true }
+  );
+
 const bookServices = {
   create,
   getAll,
@@ -50,5 +75,6 @@ const bookServices = {
   voteUp,
   voteDown,
   favorite,
+  edit,
 };
 module.exports = bookServices;
