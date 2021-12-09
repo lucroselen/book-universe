@@ -42,10 +42,6 @@ export const getUser = () => {
   return username;
 };
 
-export const isAuthenticated = () => {
-  return Boolean(getUser());
-};
-
 export const getUserById = async (id) => {
   return fetch(`${serverUrl}/users/profile/${id}`, {
     headers: {
