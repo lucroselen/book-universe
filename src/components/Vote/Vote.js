@@ -11,7 +11,9 @@ const Vote = (params) => {
     } else if (params.mode === "down") {
       mainService.voteDown(bookId);
     }
-    navigate(`/details/${bookId}`);
+    setTimeout(() => {
+      navigate(`/details/${bookId}`);
+    }, 100);
   });
 
   return null;
