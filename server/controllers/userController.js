@@ -72,7 +72,11 @@ router.get("/logout", (req, res) => {
 router.get("/profile/:id", async (req, res) => {
   try {
     let userData = await getUserById(req.params.id);
-    res.json({ firstName: userData.firstName, lastName: userData.lastName });
+    res.json({
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      favorites: userData.favorites,
+    });
   } catch (error) {
     res.status(401).json({ error: errorHandler(error) });
   }

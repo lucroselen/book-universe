@@ -5,11 +5,27 @@ import * as authService from "../../services/authService";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-  const [names, setNames] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    authService.getUserById(user.id).then((res) => setNames(res));
+    authService.getUserById(user.id).then((res) => {
+      setUserData(res);
+      setTimeout(() => {
+        setLoading(false);
+      }, 400);
+    });
   }, [user.id]);
+  const favoritesToShow = userData.favorites
+    .map((x) => [x.bookName, x.authorName].join(" by "))
+    .join(", ");
 
+  if (loading) {
+    return (
+      <div className="container">
+        <strong className="h1 loading">Loading...</strong>
+      </div>
+    );
+  }
   return (
     <div className="container allign">
       <div className="profile card">
@@ -25,7 +41,7 @@ const Profile = () => {
               </div>
               <div className="col-md-7">
                 <strong className="h2">
-                  {names.firstName} {names.lastName}
+                  {userData.firstName} {userData.lastName}
                 </strong>
                 <span>
                   <h3>FAVORITE BOOKS:</h3>
@@ -33,7 +49,7 @@ const Profile = () => {
 
                 <hr />
                 <p>
-                  <strong>You have no favorite books yet.</strong>
+                  <strong>{favoritesToShow}</strong>
                 </p>
               </div>
             </div>
