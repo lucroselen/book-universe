@@ -15,10 +15,6 @@ const Details = () => {
       setLoading(false);
     });
   }, [bookId]);
-  let bookData = book.book;
-  let voted = Boolean(book.voted);
-  let isOwnedBy = Boolean(book.isOwnedBy);
-  let isInFavorites = Boolean(book.isInFavorites);
 
   if (isLoading) {
     return (
@@ -27,6 +23,12 @@ const Details = () => {
       </div>
     );
   }
+
+  let bookData = book.book;
+  let voted = Boolean(book.voted);
+  let isOwnedBy = Boolean(book.isOwnedBy);
+  let isInFavorites = Boolean(book.isInFavorites);
+
   let stars = "";
   if (bookData.rating >= 1 && bookData.rating <= 3) {
     stars = "⭐";
