@@ -27,7 +27,7 @@ const createToken = function (user) {
   return jwtSign(payload, SECRET);
 };
 
-const getUserById = (id) => User.findById(id);
+const getUserById = (id) => User.findById(id).populate("favorites");
 
 let authServices = { register, login, createToken, getUserById };
 module.exports = authServices;
