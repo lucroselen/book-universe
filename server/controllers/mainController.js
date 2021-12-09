@@ -4,6 +4,7 @@ const { errorHandler } = require("../middlewares/errorHandler");
 const router = express.Router();
 const bookServices = require("../services/bookServices");
 const User = require("../models/User");
+const authServices = require("../services/authServices");
 
 let generalError =
   "We are experiencing technical difficulties and are working to resolve them. Thank you for your understanding!";
@@ -121,8 +122,12 @@ router.get("/vote-down/:id", async (req, res) => {
 router.get("/favorite/:id", async (req, res) => {
   let bookId = req.params.id;
   let book = await bookServices.getOne(req.params.id);
+  let user = await authServices.getUserById(req.user?._id);
   try {
-    if (!(book.creator._id.toString() === req.user._id)) {
+    if (
+      !(book.creator._id.toString() === req.user._id) &&
+      !user.favorites.find((x) => x._id.toString() === bookId)
+    ) {
       await bookServices.favorite(bookId, req.user._id);
 
       res.json({ message: "Book added to favorites!" });
