@@ -50,7 +50,6 @@ router.post("/add", async (req, res) => {
       genre,
       creator,
     });
-    //await bookServices.updateCreatorBooks(req.user._id);
     res.json({ books });
   } catch (error) {
     res.status(400).json({ error: errorHandler(error) });
