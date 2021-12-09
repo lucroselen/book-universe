@@ -36,10 +36,10 @@ const favorite = async (bookId, userId) => {
   let book = await Book.findById(bookId);
   let user = await User.findById(userId);
 
-  user.favorites.push(book);
+  let favoriteBooks = user.favorites;
+  favoriteBooks.push(book);
 
-  user.save();
-  return;
+  await User.updateOne({ _id: userId }, { favorites: favoriteBooks });
 };
 const bookServices = {
   create,
