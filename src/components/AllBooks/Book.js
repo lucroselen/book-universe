@@ -45,7 +45,7 @@ const Book = (props) => {
                         book.rating === 0
                           ? { color: "black" }
                           : book.rating > 0
-                          ? { color: "green" }
+                          ? { color: "orange" }
                           : { color: "red" }
                       }
                     >

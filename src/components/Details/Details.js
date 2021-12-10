@@ -80,7 +80,7 @@ const Details = () => {
                     bookData.rating === 0
                       ? { color: "black" }
                       : bookData.rating > 0
-                      ? { color: "green" }
+                      ? { color: "orange" }
                       : { color: "red" }
                   }
                 >
