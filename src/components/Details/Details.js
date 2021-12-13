@@ -130,7 +130,16 @@ const Details = () => {
               </>
             ) : (
               <div className="project-info-box mybuttons">
-                <h2>Log-in to edit or rate this book!</h2>
+                <h2>
+                  <Link style={{ textDecoration: "none" }} to="/login">
+                    Log-in
+                  </Link>
+                  or
+                  <Link style={{ textDecoration: "none" }} to="/register">
+                    register
+                  </Link>
+                  to edit or rate this book!
+                </h2>
               </div>
             )}
             {!isOwnedBy && user.id ? (
