@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as mainService from "../../services/mainService";
+import starsGenerator from "../../Helpers/starsGenerator";
 
 const Details = () => {
   const { user } = useContext(AuthContext);
@@ -53,18 +54,7 @@ const Details = () => {
     });
   };
 
-  let stars = "";
-  if (book.rating >= 1 && book.rating <= 3) {
-    stars = "⭐";
-  } else if (book.rating >= 4 && book.rating <= 6) {
-    stars = "⭐⭐";
-  } else if (book.rating >= 7 && book.rating <= 9) {
-    stars = "⭐⭐⭐";
-  } else if (book.rating >= 10 && book.rating <= 12) {
-    stars = "⭐⭐⭐⭐";
-  } else if (book.rating >= 13) {
-    stars = "⭐⭐⭐⭐⭐";
-  }
+  let stars = starsGenerator(book.rating);
 
   return (
     <div>

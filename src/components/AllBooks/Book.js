@@ -1,19 +1,9 @@
 import { Link } from "react-router-dom";
+import starsGenerator from "../../Helpers/starsGenerator";
 
 const Book = (props) => {
   const book = props.book;
-  let stars = "";
-  if (book.rating >= 1 && book.rating <= 3) {
-    stars = "⭐";
-  } else if (book.rating >= 4 && book.rating <= 6) {
-    stars = "⭐⭐";
-  } else if (book.rating >= 7 && book.rating <= 9) {
-    stars = "⭐⭐⭐";
-  } else if (book.rating >= 10 && book.rating <= 12) {
-    stars = "⭐⭐⭐⭐";
-  } else if (book.rating >= 13) {
-    stars = "⭐⭐⭐⭐⭐";
-  }
+  let stars = starsGenerator(book.rating);
 
   return (
     <div className="col-xs-12 col-md-6">
