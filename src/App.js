@@ -24,7 +24,6 @@ import Page404 from "./components/Page404/Page404";
 import Logout from "./components/Logout/Logout";
 import Delete from "./components/Delete/Delete";
 
-//import { useState, useEffect } from "react";
 const initialAuthState = {
   id: "",
   user: "",
