@@ -4,7 +4,8 @@
   margin: auto;
 }
 
-.mybuttons a {
+.mybuttons a,
+button {
   margin: 6px;
   width: 100%;
 }

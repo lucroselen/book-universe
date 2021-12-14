@@ -7,11 +7,17 @@ import * as mainService from "../../services/mainService";
 const Details = () => {
   const { user } = useContext(AuthContext);
   const [book, setBook] = useState([]);
+  const [voted, setVoted] = useState(false);
+  const [isOwnedBy, setIsOwnedBy] = useState(false);
+  const [isInFavorites, setIsInFavorites] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const { bookId } = useParams();
   useEffect(() => {
     mainService.getOne(bookId).then((res) => {
-      setBook(res);
+      setIsInFavorites(res.isInFavorites);
+      setBook(res.book);
+      setVoted(res.voted);
+      setIsOwnedBy(res.isOwnedBy);
       setLoading(false);
     });
   }, [bookId]);
@@ -24,21 +30,39 @@ const Details = () => {
     );
   }
 
-  let bookData = book.book;
-  let voted = Boolean(book.voted);
-  let isOwnedBy = Boolean(book.isOwnedBy);
-  let isInFavorites = Boolean(book.isInFavorites);
+  const voteOnClick = (e) => {
+    e.preventDefault();
+    let mode = Object.values(e.target)[1].mode;
+    if (mode === "up") {
+      mainService.voteUp(bookId).then(() => {
+        setBook((state) => ({ ...state, rating: state.rating + 1 }));
+        setVoted(true);
+      });
+    } else if (mode === "down") {
+      mainService.voteDown(bookId).then(() => {
+        setBook((state) => ({ ...state, rating: state.rating - 1 }));
+        setVoted(true);
+      });
+    }
+  };
+
+  const favoriteOnClick = (e) => {
+    e.preventDefault();
+    mainService.favorite(bookId).then(() => {
+      setIsInFavorites(true);
+    });
+  };
 
   let stars = "";
-  if (bookData.rating >= 1 && bookData.rating <= 3) {
+  if (book.rating >= 1 && book.rating <= 3) {
     stars = "⭐";
-  } else if (bookData.rating >= 4 && bookData.rating <= 6) {
+  } else if (book.rating >= 4 && book.rating <= 6) {
     stars = "⭐⭐";
-  } else if (bookData.rating >= 7 && bookData.rating <= 9) {
+  } else if (book.rating >= 7 && book.rating <= 9) {
     stars = "⭐⭐⭐";
-  } else if (bookData.rating >= 10 && bookData.rating <= 12) {
+  } else if (book.rating >= 10 && book.rating <= 12) {
     stars = "⭐⭐⭐⭐";
-  } else if (bookData.rating >= 13) {
+  } else if (book.rating >= 13) {
     stars = "⭐⭐⭐⭐⭐";
   }
 
@@ -51,44 +75,44 @@ const Details = () => {
               <h5>
                 <b>Book Summary</b>
               </h5>
-              <p className="mb-0">{bookData.summary}</p>
+              <p className="mb-0">{book.summary}</p>
             </div>
             <div className="project-info-box">
               <p>
-                <b>Book:</b> {bookData.bookName}
+                <b>Book:</b> {book.bookName}
               </p>
               <p>
-                <b>Author:</b> {bookData.authorName}
+                <b>Author:</b> {book.authorName}
               </p>
               <p>
-                <b>Date:</b> {bookData.date.substr(0, 10)}
+                <b>Date:</b> {book.date.substr(0, 10)}
               </p>
               <p>
-                <b>ISBN:</b> {bookData.isbn}
+                <b>ISBN:</b> {book.isbn}
               </p>
               <p>
-                <b>Genre:</b> {bookData.genre}
+                <b>Genre:</b> {book.genre}
               </p>
               <p>
-                <b>Added by:</b> {bookData.creator.firstName}{" "}
-                {bookData.creator.lastName}
+                <b>Added by:</b> {book.creator.firstName}{" "}
+                {book.creator.lastName}
               </p>
               <p>
                 <b>Current book rating: </b>
                 <b
                   style={
-                    bookData.rating === 0
+                    book.rating === 0
                       ? { color: "black" }
-                      : bookData.rating > 0
+                      : book.rating > 0
                       ? { color: "orange" }
                       : { color: "red" }
                   }
                 >
-                  {bookData.rating} {stars}
+                  {book.rating} {stars}
                 </b>
               </p>
             </div>
-            {voted === true ? (
+            {voted ? (
               <div className="project-info-box mybuttons">
                 <h2 style={{ color: "black" }}>
                   Thank you for voting for this book!
@@ -100,31 +124,30 @@ const Details = () => {
                 {isOwnedBy ? (
                   <div className="project-info-box mybuttons">
                     {" "}
-                    <Link className="btn btn-dark" to={`/edit/${bookData._id}`}>
+                    <Link className="btn btn-dark" to={`/edit/${book._id}`}>
                       Edit
                     </Link>
-                    <Link
-                      className="btn btn-danger"
-                      to={`/delete/${bookData._id}`}
-                    >
+                    <Link className="btn btn-danger" to={`/delete/${book._id}`}>
                       Delete
                     </Link>
                   </div>
                 ) : null}
-                {voted === false && !isOwnedBy ? (
+                {!voted && !isOwnedBy ? (
                   <div className="project-info-box mybuttons">
-                    <Link
+                    <button
                       className="btn btn-success"
-                      to={`/vote-up/${bookData._id}`}
+                      onClick={voteOnClick}
+                      mode="up"
                     >
                       Like
-                    </Link>
-                    <Link
+                    </button>
+                    <button
                       className="btn btn-warning"
-                      to={`/vote-down/${bookData._id}`}
+                      onClick={voteOnClick}
+                      mode="down"
                     >
                       Dislike
-                    </Link>
+                    </button>
                   </div>
                 ) : null}
               </>
@@ -145,12 +168,9 @@ const Details = () => {
             {!isOwnedBy && user.id ? (
               !isInFavorites ? (
                 <div className="project-info-box mybuttons">
-                  <Link
-                    className="btn btn-primary"
-                    to={`/favorite/${bookData._id}`}
-                  >
+                  <button className="btn btn-primary" onClick={favoriteOnClick}>
                     Add to Favorites
-                  </Link>
+                  </button>
                 </div>
               ) : (
                 <div className="project-info-box mybuttons">
@@ -163,7 +183,7 @@ const Details = () => {
           </div>
           <div className="col-md-7">
             <img
-              src={bookData.imgUrl}
+              src={book.imgUrl}
               alt="project-pic"
               height="770"
               width="600"
