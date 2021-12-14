@@ -6,8 +6,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "You must populate your first name!"],
     minlength: [
-      3,
-      "The first name should be at least 3 characters long and contains only English letters",
+      2,
+      "The first name should be at least 2 characters long and contains only English letters",
     ],
     validate: {
       validator: function (v) {
@@ -20,8 +20,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "You must populate your last name!"],
     minlength: [
-      5,
-      "The last name should be at least 5 characters long and contains only English letters",
+      2,
+      "The last name should be at least 2 characters long and contains only English letters",
     ],
     validate: {
       validator: function (v) {
