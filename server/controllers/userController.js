@@ -4,8 +4,9 @@ const { TOKEN_COOKIE_NAME } = require("../config/constants");
 const authServices = require("../services/authServices");
 const { errorHandler } = require("../middlewares/errorHandler");
 const { getUserById } = require("../services/authServices");
+const { isAlreadyLogged, isAuth } = require("../middlewares/authMiddleware");
 
-router.post("/login", async (req, res) => {
+router.post("/login", isAlreadyLogged, async (req, res) => {
   try {
     let { email, password } = req.body;
 
@@ -30,7 +31,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", isAlreadyLogged, async (req, res) => {
   let { firstName, lastName, email, password, rePassword } = req.body;
 
   email = email.toLowerCase();
@@ -60,7 +61,7 @@ router.post("/register", async (req, res) => {
     res.status(401).json({ error: errorHandler(error) });
   }
 });
-router.get("/logout", (req, res) => {
+router.get("/logout", isAuth, (req, res) => {
   try {
     res.clearCookie(TOKEN_COOKIE_NAME, { path: "/", domain: "localhost" });
     res.json("You have logged out successfully");
@@ -69,7 +70,7 @@ router.get("/logout", (req, res) => {
   }
 });
 
-router.get("/profile/:id", async (req, res) => {
+router.get("/profile/:id", isAuth, async (req, res) => {
   try {
     let userData = await getUserById(req.params.id);
     res.json({

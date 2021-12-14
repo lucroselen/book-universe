@@ -1,6 +1,7 @@
 const express = require("express");
 
 const { errorHandler } = require("../middlewares/errorHandler");
+const { isAuth } = require("../middlewares/authMiddleware");
 const router = express.Router();
 const bookServices = require("../services/bookServices");
 const User = require("../models/User");
@@ -35,7 +36,7 @@ router.get("/top-10", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", isAuth, async (req, res) => {
   let { bookName, authorName, imgUrl, isbn, date, summary, genre, creator } =
     req.body;
 
@@ -56,7 +57,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.post("/edit/:id", async (req, res) => {
+router.post("/edit/:id", isAuth, async (req, res) => {
   let { bookName, authorName, imgUrl, isbn, date, summary, genre, creator } =
     req.body;
   let bookId = req.params.id;
@@ -96,7 +97,7 @@ router.get("/details/:id", async (req, res) => {
   }
 });
 
-router.get("/delete/:id", async (req, res) => {
+router.get("/delete/:id", isAuth, async (req, res) => {
   let book = await bookServices.getOne(req.params.id);
   try {
     if (book.creator._id.toString() === req.user._id) {
@@ -110,7 +111,7 @@ router.get("/delete/:id", async (req, res) => {
   }
 });
 
-router.get("/vote-up/:id", async (req, res) => {
+router.get("/vote-up/:id", isAuth, async (req, res) => {
   let bookId = req.params.id;
   let book = await bookServices.getOne(req.params.id);
   try {
@@ -129,7 +130,7 @@ router.get("/vote-up/:id", async (req, res) => {
   }
 });
 
-router.get("/vote-down/:id", async (req, res) => {
+router.get("/vote-down/:id", isAuth, async (req, res) => {
   let bookId = req.params.id;
   let book = await bookServices.getOne(req.params.id);
   try {
@@ -148,7 +149,7 @@ router.get("/vote-down/:id", async (req, res) => {
   }
 });
 
-router.get("/favorite/:id", async (req, res) => {
+router.get("/favorite/:id", isAuth, async (req, res) => {
   let bookId = req.params.id;
   let book = await bookServices.getOne(req.params.id);
   let user = await authServices.getUserById(req.user?._id);
