@@ -23,6 +23,8 @@ import Details from "./components/Details/Details";
 import Page404 from "./components/Page404/Page404";
 import Logout from "./components/Logout/Logout";
 import Delete from "./components/Delete/Delete";
+import GuardedRoute from "./components/Common/GuardedRoute";
+import LoggedGuardedRoute from "./components/Common/LoggedGuardedRoute";
 
 const initialAuthState = {
   id: "",
@@ -38,21 +40,29 @@ function App() {
     setUser(initialAuthState);
   };
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, isAuthenticated: user.id }}
+    >
       <Router>
         <Header />
         <main id="main-content">
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route element={<GuardedRoute />}>
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/add" element={<AddBook />} />
+              <Route path="/edit/:bookId" element={<EditBook />} />
+              <Route path="/delete/:bookId" element={<Delete />} />
+            </Route>
+
+            <Route element={<LoggedGuardedRoute />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+
             <Route path="/all-books" element={<AllBooks />} />
             <Route path="/top-10" element={<AllBooks mode="getTop10" />} />
-            <Route path="/add" element={<AddBook />} />
-            <Route path="/edit/:bookId" element={<EditBook />} />
             <Route path="/details/:bookId" element={<Details />} />
-            <Route path="/delete/:bookId" element={<Delete />} />
             <Route path="/" element={<Home />} />
             <Route path="/404" element={<Page404 />} />
             <Route path="*" element={<Navigate replace to="/404" />} />
