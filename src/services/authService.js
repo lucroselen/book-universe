@@ -1,3 +1,4 @@
+import { resCheck } from "../Helpers/resCheck";
 const serverUrl = "http://localhost:5000";
 
 export const register = async (
@@ -15,13 +16,7 @@ export const register = async (
     credentials: "include",
     body: JSON.stringify({ firstName, lastName, email, password, rePassword }),
   });
-  let result = await res.json();
-
-  if (res.ok) {
-    return result;
-  } else {
-    throw result;
-  }
+  return resCheck(res);
 };
 
 export const login = async (email, password) => {
@@ -34,13 +29,7 @@ export const login = async (email, password) => {
     body: JSON.stringify({ email, password }),
   });
 
-  let result = await res.json();
-
-  if (res.ok) {
-    return result;
-  } else {
-    throw result;
-  }
+  return resCheck(res);
 };
 
 export const logout = () => {

@@ -1,3 +1,4 @@
+import { resCheck } from "../Helpers/resCheck";
 const serverUrl = "http://localhost:5000";
 
 export const getAll = () => {
@@ -15,7 +16,7 @@ export const getTop10 = () => {
 export const deleteOne = (id) => {
   return fetch(`${serverUrl}/delete/${id}`, {
     credentials: "include",
-  }).then((res) => res.json());
+  }).then((res) => resCheck(res));
 };
 
 export const getOne = (id) => {

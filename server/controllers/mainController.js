@@ -104,7 +104,7 @@ router.get("/delete/:id", isAuth, async (req, res) => {
       await bookServices.deleteRecord(req.params.id);
       res.json({ message: "Book deleted successfully!" });
     } else {
-      res.status(403).json({ message: "You are not the owner of this book!" });
+      res.status(403).json({ error: "You are not the owner of this book!" });
     }
   } catch (error) {
     res.json({ error: errorHandler(error) });
