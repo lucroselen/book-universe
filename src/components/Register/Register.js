@@ -2,12 +2,14 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 import * as authService from "../../services/authService";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Register = () => {
   const { login } = useContext(AuthContext);
+  const { addNotification } = useNotificationContext();
 
   let navigate = useNavigate();
   const submitHandler = (e) => {
@@ -20,10 +22,15 @@ const Register = () => {
 
     authService
       .register(firstName, lastName, email, password, rePassword)
-      .then((authData) => {
-        login(authData);
-        navigate("/all-books");
-      });
+      .then((authData) => login(authData))
+      .then(() => {
+        addNotification(
+          "Registration successful! Welcome to Book Universe!",
+          "alert-success"
+        );
+      })
+      .then(() => navigate("/all-books"))
+      .catch((error) => addNotification(error.error, "alert-danger"));
   };
 
   return (

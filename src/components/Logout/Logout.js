@@ -15,9 +15,9 @@ const Logout = () => {
       .logout()
       .then(() => {
         logout();
-        navigate("/");
       })
-      .then(() => addNotification("Logout successful!", "alert-success"));
+      .then(() => addNotification("Logout successful!", "alert-success"))
+      .then(() => navigate("/"));
   });
 
   return null;

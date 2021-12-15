@@ -1,14 +1,27 @@
 const serverUrl = "http://localhost:5000";
 
-export const register = (firstName, lastName, email, password, rePassword) => {
-  return fetch(`${serverUrl}/users/register`, {
+export const register = async (
+  firstName,
+  lastName,
+  email,
+  password,
+  rePassword
+) => {
+  let res = await fetch(`${serverUrl}/users/register`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
     credentials: "include",
     body: JSON.stringify({ firstName, lastName, email, password, rePassword }),
-  }).then((res) => res.json());
+  });
+  let result = await res.json();
+
+  if (res.ok) {
+    return result;
+  } else {
+    throw result;
+  }
 };
 
 export const login = async (email, password) => {

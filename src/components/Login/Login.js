@@ -26,8 +26,8 @@ const Login = () => {
       .login(email, password)
       .then((authData) => {
         login(authData);
-        addNotification("Successful login!", "alert-success");
       })
+      .then(() => addNotification("Successful login!", "alert-success"))
       .then(() => navigate("/all-books"))
       .catch((error) => addNotification(error.error, "alert-danger"));
   };
