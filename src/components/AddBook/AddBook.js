@@ -3,9 +3,11 @@ import { useNavigate } from "react-router";
 import * as mainService from "../../services/mainService";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 const AddBook = () => {
   const { user } = useContext(AuthContext);
+  const { addNotification } = useNotificationContext();
 
   let navigate = useNavigate();
   const submitHandler = (e) => {
@@ -18,9 +20,9 @@ const AddBook = () => {
     let creator = user.id;
     mainService
       .add(bookName, authorName, imgUrl, isbn, date, summary, genre, creator)
-      .then(() => {
-        navigate("/all-books");
-      });
+      .then(() => addNotification("Book added successfully!", "alert-success"))
+      .then(() => navigate("/all-books"))
+      .catch((error) => addNotification(error.error, "alert-danger"));
   };
   return (
     <section id="addBook" className="intro fix">

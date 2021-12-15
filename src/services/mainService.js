@@ -51,7 +51,7 @@ export const add = (
       genre,
       creator,
     }),
-  }).then((res) => res.json());
+  }).then((res) => resCheck(res));
 };
 
 export const edit = (
