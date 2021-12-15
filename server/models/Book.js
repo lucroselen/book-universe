@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const bookSchema = new mongoose.Schema({
   bookName: {
     type: String,
-    required: true,
+    required: [true, "The name of the Book cannot be blank!"],
     minlength: [3, "The name of the book should be at least 3 characters!"],
   },
   authorName: {
     type: String,
-    required: true,
+    required: [true, "The name of the Author cannot be blank!"],
     minlength: [6, "The name of the author should be at least 6 characters!"],
   },
   genre: {
     type: String,
-    required: true,
+    required: [true, "The genre cannot be blank!"],
     minlength: [3, "The genre should be at least 3 characters!"],
   },
   date: {
@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
   },
   imgUrl: {
     type: String,
-    required: true,
+    required: [true, "Please provide a book's cover image link."],
     validate: [
       /^https?:\/\//i,
       "The book's cover image should start with http:// or https://",
@@ -29,12 +29,12 @@ const bookSchema = new mongoose.Schema({
   },
   summary: {
     type: String,
-    required: true,
+    required: [true, "The summary cannot be blank!"],
     minlength: [8, "The summary should be a minimum of 8 characters long"],
   },
   isbn: {
     type: Number,
-    required: true,
+    required: [true, "The ISBN cannot be blank!"],
     minlength: [10, "The ISBN should be a minimum of 10 characters long"],
     maxlength: [13, "The ISBN should be a maximum of 13 characters long"],
   },
