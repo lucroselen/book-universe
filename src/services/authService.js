@@ -26,7 +26,7 @@ export const login = async (email, password) => {
   if (res.ok) {
     return result;
   } else {
-    throw result.message;
+    throw result;
   }
 };
 

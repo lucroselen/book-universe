@@ -4,8 +4,11 @@ import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 const Login = () => {
+  const { addNotification } = useNotificationContext();
+
   const { login } = useContext(AuthContext);
   let navigate = useNavigate();
   const submitHandler = (e) => {
@@ -14,11 +17,19 @@ const Login = () => {
     let formData = new FormData(e.currentTarget);
 
     let { email, password } = Object.fromEntries(formData);
+    if (!email || !password) {
+      addNotification("You must fill in both fields!", "alert-danger");
+      return;
+    }
 
-    authService.login(email, password).then((authData) => {
-      login(authData);
-      navigate("/all-books");
-    });
+    authService
+      .login(email, password)
+      .then((authData) => {
+        login(authData);
+        addNotification("Successful login!", "alert-success");
+      })
+      .then(() => navigate("/all-books"))
+      .catch((error) => addNotification(error.error, "alert-danger"));
   };
 
   return (
