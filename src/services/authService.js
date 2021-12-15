@@ -1,35 +1,26 @@
 import { resCheck } from "../Helpers/resCheck";
 const serverUrl = "http://localhost:5000";
 
-export const register = async (
-  firstName,
-  lastName,
-  email,
-  password,
-  rePassword
-) => {
-  let res = await fetch(`${serverUrl}/users/register`, {
+export const register = (firstName, lastName, email, password, rePassword) => {
+  return fetch(`${serverUrl}/users/register`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
     credentials: "include",
     body: JSON.stringify({ firstName, lastName, email, password, rePassword }),
-  });
-  return resCheck(res);
+  }).then((res) => resCheck(res));
 };
 
-export const login = async (email, password) => {
-  let res = await fetch(`${serverUrl}/users/login`, {
+export const login = (email, password) => {
+  return fetch(`${serverUrl}/users/login`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
     credentials: "include",
     body: JSON.stringify({ email, password }),
-  });
-
-  return resCheck(res);
+  }).then((res) => resCheck(res));
 };
 
 export const logout = () => {
