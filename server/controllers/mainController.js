@@ -75,7 +75,7 @@ router.post("/edit/:id", isAuth, async (req, res) => {
       );
       res.json({ message: "Book edited successfully!" });
     } else {
-      res.status(403).json({ message: "You are not the owner of this book!" });
+      res.status(403).json({ error: "You are not the owner of this book!" });
     }
   } catch (error) {
     res.status(400).json({ error: errorHandler(error) });

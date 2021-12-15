@@ -81,7 +81,7 @@ export const edit = (
       genre,
       creator,
     }),
-  }).then((res) => res.json());
+  }).then((res) => resCheck(res));
 };
 
 export const voteUp = (id) => {

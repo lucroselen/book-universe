@@ -3,8 +3,11 @@ import * as mainService from "../../services/mainService";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 const EditBook = () => {
+  const { addNotification } = useNotificationContext();
+
   let navigate = useNavigate();
   const [book, setBook] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -45,9 +48,9 @@ const EditBook = () => {
         genre,
         creator
       )
-      .then(() => {
-        navigate(`/details/${bookId}`);
-      });
+      .then(() => addNotification("Book edited successfully!", "alert-success"))
+      .catch((error) => addNotification(error.error, "alert-danger"))
+      .finally(() => navigate(`/details/${bookId}`));
   };
   return (
     <section id="editBook" className="intro fix">
