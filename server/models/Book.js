@@ -35,8 +35,8 @@ const bookSchema = new mongoose.Schema({
   isbn: {
     type: Number,
     required: [true, "The ISBN cannot be blank!"],
-    minlength: [10, "The ISBN should be a minimum of 10 characters long"],
-    maxlength: [13, "The ISBN should be a maximum of 13 characters long"],
+    min: [1000000000, "The ISBN should be a minimum of 10 characters long"],
+    max: [9999999999999, "The ISBN should be a maximum of 13 characters long"],
   },
   rating: {
     type: Number,
