@@ -123,7 +123,9 @@ router.get("/vote-up/:id", isAuth, async (req, res) => {
 
       res.json({ message: "Book liked" });
     } else {
-      res.json({ message: "You are not allowed to like/dislike this book!" });
+      res
+        .status(403)
+        .json({ error: "You are not allowed to like/dislike this book!" });
     }
   } catch (error) {
     res.status(400).json({ error: generalError });
@@ -142,7 +144,9 @@ router.get("/vote-down/:id", isAuth, async (req, res) => {
 
       res.json({ message: "Book disliked!" });
     } else {
-      res.json({ message: "You are not allowed to like/dislike this book!" });
+      res
+        .status(403)
+        .json({ error: "You are not allowed to like/dislike this book!" });
     }
   } catch (error) {
     res.status(400).json({ error: generalError });
@@ -162,8 +166,8 @@ router.get("/favorite/:id", isAuth, async (req, res) => {
 
       res.json({ message: "Book added to favorites!" });
     } else {
-      res.json({
-        message: "You are not allowed to add this book to favourites!",
+      res.status(403).json({
+        error: "You are not allowed to add this book to favourites!",
       });
     }
   } catch (error) {

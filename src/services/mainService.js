@@ -87,16 +87,16 @@ export const edit = (
 export const voteUp = (id) => {
   return fetch(`${serverUrl}/vote-up/${id}`, {
     credentials: "include",
-  }).then((res) => res.json());
+  }).then((res) => resCheck(res));
 };
 
 export const voteDown = (id) => {
   return fetch(`${serverUrl}/vote-down/${id}`, {
     credentials: "include",
-  }).then((res) => res.json());
+  }).then((res) => resCheck(res));
 };
 
 export const favorite = (id) =>
   fetch(`${serverUrl}/favorite/${id}`, {
     credentials: "include",
-  }).then((res) => res.json());
+  }).then((res) => resCheck(res));

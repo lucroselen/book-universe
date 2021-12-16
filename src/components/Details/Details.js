@@ -4,8 +4,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as mainService from "../../services/mainService";
 import starsGenerator from "../../Helpers/starsGenerator";
+import { useNotificationContext } from "../../contexts/NotificationContext";
 
 const Details = () => {
+  const { addNotification } = useNotificationContext();
+
   const { user } = useContext(AuthContext);
   const [book, setBook] = useState([]);
   const [voted, setVoted] = useState(false);
@@ -35,23 +38,35 @@ const Details = () => {
     e.preventDefault();
     let mode = Object.values(e.target)[1].mode;
     if (mode === "up") {
-      mainService.voteUp(bookId).then(() => {
-        setBook((state) => ({ ...state, rating: state.rating + 1 }));
-        setVoted(true);
-      });
+      mainService
+        .voteUp(bookId)
+        .then(() => {
+          setBook((state) => ({ ...state, rating: state.rating + 1 }));
+          setVoted(true);
+        })
+        .then(() => addNotification("Book liked!", "alert-success"))
+        .catch((error) => addNotification(error.error, "alert-danger"));
     } else if (mode === "down") {
-      mainService.voteDown(bookId).then(() => {
-        setBook((state) => ({ ...state, rating: state.rating - 1 }));
-        setVoted(true);
-      });
+      mainService
+        .voteDown(bookId)
+        .then(() => {
+          setBook((state) => ({ ...state, rating: state.rating - 1 }));
+          setVoted(true);
+        })
+        .then(() => addNotification("Book disliked!", "alert-success"))
+        .catch((error) => addNotification(error.error, "alert-danger"));
     }
   };
 
   const favoriteOnClick = (e) => {
     e.preventDefault();
-    mainService.favorite(bookId).then(() => {
-      setIsInFavorites(true);
-    });
+    mainService
+      .favorite(bookId)
+      .then(() => {
+        setIsInFavorites(true);
+      })
+      .then(() => addNotification("Book added to favorites!", "alert-success"))
+      .catch((error) => addNotification(error.error, "alert-danger"));
   };
 
   let stars = starsGenerator(book.rating);
