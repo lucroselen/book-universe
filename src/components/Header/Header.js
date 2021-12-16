@@ -67,6 +67,11 @@ const Header = () => {
                 Top 10 books
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/find-us">
+                Find Us
+              </Link>
+            </li>
             {user.id ? userView : guestView}
           </ul>
         </div>

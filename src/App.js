@@ -24,6 +24,7 @@ import Details from "./components/Details/Details";
 import Page404 from "./components/Page404/Page404";
 import Logout from "./components/Logout/Logout";
 import Delete from "./components/Delete/Delete";
+import MapContainer from "./components/MapContainer/MapContainer";
 import GuardedRoute from "./components/Common/GuardedRoute";
 import LoggedGuardedRoute from "./components/Common/LoggedGuardedRoute";
 import Notification from "./components/Common/Notification";
@@ -68,6 +69,7 @@ function App() {
               <Route path="/top-10" element={<AllBooks mode="getTop10" />} />
               <Route path="/details/:bookId" element={<Details />} />
               <Route path="/" element={<Home />} />
+              <Route path="/find-us" element={<MapContainer />} />
               <Route path="/404" element={<Page404 />} />
               <Route path="*" element={<Navigate replace to="/404" />} />
             </Routes>
