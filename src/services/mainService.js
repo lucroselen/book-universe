@@ -100,3 +100,15 @@ export const favorite = (id) =>
   fetch(`${serverUrl}/favorite/${id}`, {
     credentials: "include",
   }).then((res) => resCheck(res));
+
+export const comment = (id, comment) =>
+  fetch(`${serverUrl}/comment/${id}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      comment,
+    }),
+  }).then((res) => resCheck(res));
