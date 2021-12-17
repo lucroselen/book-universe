@@ -175,4 +175,18 @@ router.get("/favorite/:id", isAuth, async (req, res) => {
   }
 });
 
+router.post("/comment/:id", isAuth, async (req, res) => {
+  let { comment } = req.body;
+  let bookId = req.params.id;
+  let user = await authServices.getUserById(req.user?._id);
+  let userComment = `${user.firstName} ${user.lastName}: ${comment}`;
+  try {
+    await bookServices.comment(bookId, userComment);
+
+    res.json({ message: "Comment added successfully!" });
+  } catch (error) {
+    res.status(400).json({ error: generalError });
+  }
+});
+
 module.exports = router;
