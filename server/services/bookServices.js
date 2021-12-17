@@ -69,7 +69,7 @@ const edit = (
 const comment = async (bookId, comment) => {
   let book = await getOne(bookId);
   let addComments = book.comments;
-  addComments.push(comment);
+  addComments.unshift(comment);
   await Book.updateOne(
     { _id: bookId },
     {

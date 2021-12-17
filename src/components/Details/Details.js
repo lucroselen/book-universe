@@ -87,7 +87,7 @@ const Details = () => {
       .comment(bookId, comment)
       .then(() => {
         let updateComments = book.comments;
-        updateComments.push(
+        updateComments.unshift(
           `${userObject.firstName} ${userObject.lastName}: ${comment}`
         );
         setBook((state) => ({ ...state, comments: updateComments }));
