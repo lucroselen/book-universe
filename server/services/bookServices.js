@@ -66,6 +66,19 @@ const edit = (
     { runValidators: true }
   );
 
+const comment = async (bookId, comment) => {
+  let book = await getOne(bookId);
+  let addComments = book.comments;
+  addComments.push(comment);
+  await Book.updateOne(
+    { _id: bookId },
+    {
+      comments: addComments,
+    },
+    { runValidators: true }
+  );
+};
+
 const bookServices = {
   create,
   getAll,
@@ -76,5 +89,6 @@ const bookServices = {
   voteDown,
   favorite,
   edit,
+  comment,
 };
 module.exports = bookServices;
