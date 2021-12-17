@@ -49,6 +49,10 @@ const bookSchema = new mongoose.Schema({
     },
   ],
   creator: { type: mongoose.Types.ObjectId, ref: "User" },
+  comments: {
+    type: Array,
+    default: [],
+  },
 });
 
 const Book = mongoose.model("Book", bookSchema);
