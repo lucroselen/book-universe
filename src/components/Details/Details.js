@@ -3,19 +3,25 @@ import { Link, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as mainService from "../../services/mainService";
+import * as authService from "../../services/authService";
 import starsGenerator from "../../Helpers/starsGenerator";
 import { useNotificationContext } from "../../contexts/NotificationContext";
+import uniqid from "uniqid";
 
 const Details = () => {
   const { addNotification } = useNotificationContext();
 
   const { user } = useContext(AuthContext);
   const [book, setBook] = useState([]);
+  const [userObject, setUserObject] = useState([]);
   const [voted, setVoted] = useState(false);
   const [isOwnedBy, setIsOwnedBy] = useState(false);
   const [isInFavorites, setIsInFavorites] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const { bookId } = useParams();
+  useEffect(() => {
+    authService.getUserById(user.id).then((res) => setUserObject(res));
+  }, [user]);
   useEffect(() => {
     mainService.getOne(bookId).then((res) => {
       setIsInFavorites(res.isInFavorites);
@@ -66,6 +72,28 @@ const Details = () => {
         setIsInFavorites(true);
       })
       .then(() => addNotification("Book added to favorites!", "alert-success"))
+      .catch((error) => addNotification(error.error, "alert-danger"));
+  };
+
+  const addComment = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(e.currentTarget);
+    let { comment } = Object.fromEntries(formData);
+    if (!comment) {
+      return addNotification("Comment cannot be blank!", "alert-danger");
+    }
+    mainService
+      .comment(bookId, comment)
+      .then(() => {
+        let updateComments = book.comments;
+        updateComments.push(
+          `${userObject.firstName} ${userObject.lastName}: ${comment}`
+        );
+        setBook((state) => ({ ...state, comments: updateComments }));
+      })
+      .then(() => addNotification("Comment added!", "alert-success"))
+      .then(() => e.target.reset())
       .catch((error) => addNotification(error.error, "alert-danger"));
   };
 
@@ -124,7 +152,7 @@ const Details = () => {
                 </h2>
               </div>
             ) : null}
-            {user.id ? (
+            {user.id !== "" && user ? (
               <>
                 {isOwnedBy ? (
                   <div className="project-info-box mybuttons">
@@ -158,19 +186,21 @@ const Details = () => {
               </>
             ) : (
               <div className="project-info-box mybuttons">
-                <h2>
-                  <Link style={{ textDecoration: "none" }} to="/login">
-                    Log-in
-                  </Link>
-                  or
-                  <Link style={{ textDecoration: "none" }} to="/register">
-                    register
-                  </Link>
-                  to edit or rate this book!
-                </h2>
+                <p>
+                  <b>
+                    <Link style={{ textDecoration: "none" }} to="/login">
+                      Log-in
+                    </Link>
+                    or
+                    <Link style={{ textDecoration: "none" }} to="/register">
+                      register
+                    </Link>
+                    to edit, rate or comment this book!
+                  </b>
+                </p>
               </div>
             )}
-            {!isOwnedBy && user.id ? (
+            {!isOwnedBy && user.id !== "" && user ? (
               !isInFavorites ? (
                 <div className="project-info-box mybuttons">
                   <button className="btn btn-primary" onClick={favoriteOnClick}>
@@ -190,11 +220,57 @@ const Details = () => {
             <img
               src={book.imgUrl}
               alt="project-pic"
-              height="770"
-              width="600"
+              height="830"
+              width="670"
               className="rounded details-img"
             />
           </div>
+          {user.id !== "" && user ? (
+            <>
+              <div id="wrapper">
+                <form
+                  action={`/comment/${bookId}`}
+                  onSubmit={addComment}
+                  method="POST"
+                >
+                  <div className="mb-4">
+                    <label
+                      className="form-label h5 comment-label"
+                      htmlFor="comment"
+                    >
+                      Add a comment!
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="comment"
+                      rows="3"
+                      name="comment"
+                      placeholder="Write a comment..."
+                    ></textarea>
+                    <input
+                      className="btn btn-dark comment-btn btn-lg"
+                      type="submit"
+                      value="Add Comment"
+                    ></input>
+                  </div>
+                </form>
+              </div>
+
+              <div>
+                <div className="project-info-box">
+                  {book.comments.length > 0 ? (
+                    book.comments.map((x) => (
+                      <p key={uniqid()}>
+                        <strong>{x}</strong>
+                      </p>
+                    ))
+                  ) : (
+                    <p className="h4">Be the first to comment this book!</p>
+                  )}
+                </div>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
     </div>
