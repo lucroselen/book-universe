@@ -89,6 +89,7 @@ const AddBook = () => {
                             id="isbn"
                             name="isbn"
                             className="form-control"
+                            placeholder="Example: 9786632235623"
                           />
                         </div>
                       </div>
@@ -114,6 +115,7 @@ const AddBook = () => {
                           id="summary"
                           rows="3"
                           name="summary"
+                          placeholder="A short summary of the book..."
                         ></textarea>
                       </div>
                     </div>

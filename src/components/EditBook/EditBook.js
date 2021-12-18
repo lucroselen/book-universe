@@ -124,6 +124,7 @@ const EditBook = () => {
                             id="isbn"
                             name="isbn"
                             className="form-control"
+                            placeholder="Example: 9786632235623"
                             defaultValue={bookData.isbn}
                           />
                         </div>
@@ -151,6 +152,7 @@ const EditBook = () => {
                           id="summary"
                           rows="3"
                           name="summary"
+                          placeholder="A short summary of the book..."
                           defaultValue={bookData.summary}
                         ></textarea>
                       </div>
