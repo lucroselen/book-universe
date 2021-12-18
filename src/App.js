@@ -10,6 +10,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 
 import useLocalStorage from "./hooks/useLocalStorage";
+import ErrorBoundary from "./components/Common/ErrorBoundary";
 
 import Login from "./components/Login/Login";
 import Header from "./components/Header/Header";
@@ -43,41 +44,43 @@ function App() {
     setUser(initialAuthState);
   };
   return (
-    <AuthContext.Provider
-      value={{ user, login, logout, isAuthenticated: user.id }}
-    >
-      <NotificationProvider>
-        <Router>
-          <Header />
-          <Notification />
-          <main id="main-content">
-            <Routes>
-              <Route element={<GuardedRoute />}>
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/add" element={<AddBook />} />
-                <Route path="/edit/:bookId" element={<EditBook />} />
-                <Route path="/delete/:bookId" element={<Delete />} />
-              </Route>
+    <ErrorBoundary>
+      <AuthContext.Provider
+        value={{ user, login, logout, isAuthenticated: user.id }}
+      >
+        <NotificationProvider>
+          <Router>
+            <Header />
+            <Notification />
+            <main id="main-content">
+              <Routes>
+                <Route element={<GuardedRoute />}>
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/add" element={<AddBook />} />
+                  <Route path="/edit/:bookId" element={<EditBook />} />
+                  <Route path="/delete/:bookId" element={<Delete />} />
+                </Route>
 
-              <Route element={<LoggedGuardedRoute />}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </Route>
+                <Route element={<LoggedGuardedRoute />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
 
-              <Route path="/all-books" element={<AllBooks />} />
-              <Route path="/top-10" element={<AllBooks mode="getTop10" />} />
-              <Route path="/details/:bookId" element={<Details />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/find-us" element={<MapContainer />} />
-              <Route path="/404" element={<Page404 />} />
-              <Route path="*" element={<Navigate replace to="/404" />} />
-            </Routes>
-          </main>
-          <Footer />
-        </Router>
-      </NotificationProvider>
-    </AuthContext.Provider>
+                <Route path="/all-books" element={<AllBooks />} />
+                <Route path="/top-10" element={<AllBooks mode="getTop10" />} />
+                <Route path="/details/:bookId" element={<Details />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/find-us" element={<MapContainer />} />
+                <Route path="/404" element={<Page404 />} />
+                <Route path="*" element={<Navigate replace to="/404" />} />
+              </Routes>
+            </main>
+            <Footer />
+          </Router>
+        </NotificationProvider>
+      </AuthContext.Provider>
+    </ErrorBoundary>
   );
 }
 
