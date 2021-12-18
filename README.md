@@ -15,4 +15,4 @@ npm i - в папка server
 
 npm start - в главната папка
 
-npm start в папка server
+npm start - в папка server
