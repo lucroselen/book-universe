@@ -23,3 +23,6 @@ npm start - в папка server
 
 Application uploaded to Heroku:
 https://book-universe-app.herokuapp.com/ - тук може да се види апликацията без да има нуждата да се сваля кода локално
+
+Recommended browser: Chrome
+Cookies/3rd Party Cookies must be allowed!
