@@ -26,4 +26,8 @@ https://book-universe-app.herokuapp.com/ - тук може да се види а
 
 Recommended browser: Chrome, Opera
 
+!! Don't use Microsoft Edge !!
+
+Known issue for Microsoft Edge: Logout doesn't delete cookies, thus preventing a new login before manually deleting browser cookies.
+
 Cookies/3rd Party Cookies must be allowed!
