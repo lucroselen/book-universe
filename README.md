@@ -19,9 +19,19 @@ npm start - в папка server
 
 !! Нужен е локално инсталиран MongoDB с running services, за да работи базата.
 
+
+Не е нужно да ползвате истински имейл адрес, за да се регистрирате. Може да ползвате example@hotmail.com.
+
+Готов тестови юзър:
+
+email: john@mail.com
+
+password: 123456
+
+
 # 2022 Update:
 
-Application uploaded to Heroku:
+Application deployed to Heroku:
 https://book-universe-app.herokuapp.com/ - тук може да се види апликацията без да има нуждата да се сваля кода локално
 
 Recommended browser: Chrome, Opera, Edge
