@@ -18,3 +18,8 @@ npm start - в главната папка
 npm start - в папка server
 
 !! Нужен е локално инсталиран MongoDB с running services, за да работи базата.
+
+# 2022 Update:
+
+Application uploaded to Heroku:
+https://book-universe-app.herokuapp.com/ - тук може да се види апликацията без да има нуждата да се сваля кода локално
