@@ -29,11 +29,3 @@ email: john@mail.com
 password: 123456
 
 
-# 2022 Update:
-
-Application deployed to Heroku:
-https://book-universe-app.herokuapp.com/ - тук може да се види апликацията без да има нуждата да се сваля кода локално
-
-Recommended browser: Chrome, Opera, Edge
-
-Cookies/3rd Party Cookies must be allowed!
